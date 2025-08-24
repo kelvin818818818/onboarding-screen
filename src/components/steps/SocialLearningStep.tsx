@@ -1,25 +1,36 @@
 import React from 'react';
-import { OnboardingData } from '../../types/onboarding';
+import { motion } from 'framer-motion';
+import { UserProfile } from '../../types/onboarding';
 
 interface SocialLearningStepProps {
-  data: OnboardingData;
-  onUpdate: (data: Partial<OnboardingData>) => void;
+  profile: UserProfile;
+  onUpdate: (profile: Partial<UserProfile>) => void;
   onNext: () => void;
   onBack: () => void;
 }
 
 export const SocialLearningStep: React.FC<SocialLearningStepProps> = ({
-  data,
+  profile,
   onUpdate,
   onNext,
   onBack,
 }) => {
   const handleCollaborationChange = (collaboration: string) => {
-    onUpdate({ collaboration });
+    const currentPreferences = profile.collaborationPreferences || [];
+    const updatedPreferences = currentPreferences.includes(collaboration)
+      ? currentPreferences.filter(pref => pref !== collaboration)
+      : [...currentPreferences, collaboration];
+    
+    onUpdate({ collaborationPreferences: updatedPreferences });
   };
 
   const handleCommunityChange = (community: string) => {
-    onUpdate({ community });
+    const currentParticipation = profile.communityParticipation || [];
+    const updatedParticipation = currentParticipation.includes(community)
+      ? currentParticipation.filter(part => part !== community)
+      : [...currentParticipation, community];
+    
+    onUpdate({ communityParticipation: updatedParticipation });
   };
 
   return (
@@ -29,7 +40,12 @@ export const SocialLearningStep: React.FC<SocialLearningStepProps> = ({
           <button className="skip-btn">Skip</button>
         </div>
         
-        <div className="onboarding-content">
+        <motion.div 
+          className="card-content"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           <div className="character-container">
             <div className="character-illustration">
               <div className="character-emoji">👥</div>
@@ -46,7 +62,7 @@ export const SocialLearningStep: React.FC<SocialLearningStepProps> = ({
           <p>How do you prefer to learn with others?</p>
 
           <div className="form-section">
-            <label>Collaboration Style</label>
+            <label>Collaboration Style (Select all that apply)</label>
             <div className="option-grid">
               {[
                 { value: 'solo', label: 'Solo Learning', icon: '🧑‍💻' },
@@ -56,7 +72,7 @@ export const SocialLearningStep: React.FC<SocialLearningStepProps> = ({
               ].map((option) => (
                 <button
                   key={option.value}
-                  className={`option-card ${data.collaboration === option.value ? 'selected' : ''}`}
+                  className={`option-card ${(profile.collaborationPreferences || []).includes(option.value) ? 'selected' : ''}`}
                   onClick={() => handleCollaborationChange(option.value)}
                 >
                   <span className="option-icon">{option.icon}</span>
@@ -67,7 +83,7 @@ export const SocialLearningStep: React.FC<SocialLearningStepProps> = ({
           </div>
 
           <div className="form-section">
-            <label>Community Engagement</label>
+            <label>Community Engagement (Select all that apply)</label>
             <div className="option-grid">
               {[
                 { value: 'observer', label: 'Observer', icon: '👁️' },
@@ -77,7 +93,7 @@ export const SocialLearningStep: React.FC<SocialLearningStepProps> = ({
               ].map((option) => (
                 <button
                   key={option.value}
-                  className={`option-card ${data.community === option.value ? 'selected' : ''}`}
+                  className={`option-card ${(profile.communityParticipation || []).includes(option.value) ? 'selected' : ''}`}
                   onClick={() => handleCommunityChange(option.value)}
                 >
                   <span className="option-icon">{option.icon}</span>
@@ -86,7 +102,7 @@ export const SocialLearningStep: React.FC<SocialLearningStepProps> = ({
               ))}
             </div>
           </div>
-        </div>
+        </motion.div>
 
         <div className="onboarding-footer">
           <div className="progress-dots">
@@ -99,7 +115,10 @@ export const SocialLearningStep: React.FC<SocialLearningStepProps> = ({
             <button 
               className="btn-primary" 
               onClick={onNext}
-              disabled={!data.collaboration || !data.community}
+              disabled={
+                !(profile.collaborationPreferences && profile.collaborationPreferences.length > 0) ||
+                !(profile.communityParticipation && profile.communityParticipation.length > 0)
+              }
             >
               Continue
             </button>
