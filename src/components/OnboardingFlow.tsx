@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { UserProfile } from '../types/onboarding';
 import { WelcomeStep } from './steps/WelcomeStep';
@@ -15,9 +15,14 @@ import { PersonalizationStep } from './steps/PersonalizationStep';
 import { AssessmentStep } from './steps/AssessmentStep';
 import { CertificationStep } from './steps/CertificationStep';
 import { SocialLearningStep } from './steps/SocialLearningStep';
+import { CognitiveProfileStep } from './steps/CognitiveProfileStep';
+import { BehavioralAnalysisStep } from './steps/BehavioralAnalysisStep';
+import { ContextualAnalysisStep } from './steps/ContextualAnalysisStep';
+import { AdaptivePreferencesStep } from './steps/AdaptivePreferencesStep';
 import { CompletionStep } from './steps/CompletionStep';
+import { DashboardPreview } from './steps/DashboardPreview';
 
-const TOTAL_STEPS = 15;
+const TOTAL_STEPS = 20;
 
 export const OnboardingFlow: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -158,7 +163,46 @@ export const OnboardingFlow: React.FC = () => {
     learningStyleAssessment: [],
     personalityType: '',
     cognitivePreferences: [],
+
+    // Advanced Profiling Data
+    learningContext: {
+      workEnvironment: '',
+      dailyEnglishUsage: '',
+      communicationNeeds: [],
+      professionalRequirements: [],
+      personalCircumstances: [],
+    },
+
+    // Detailed Preferences
+    contentPreferences: {
+      topicAreas: [],
+      difficultyProgression: '',
+      contentFormat: [],
+      interactivityLevel: '',
+      realWorldRelevance: '',
+    },
+
+    // Behavioral Patterns
+    learningBehavior: {
+      studyHabits: [],
+      procrastinationTendencies: '',
+      motivationalTriggers: [],
+      preferredFeedbackFrequency: '',
+      errorToleranceLevel: '',
+    },
+
+    // Cognitive Profile
+    cognitiveProfile: {
+      memoryStrength: [],
+      processingSpeed: '',
+      attentionSpan: '',
+      learningDisabilities: [],
+      cognitiveLoadPreference: '',
+    },
   });
+
+  const [aiProcessing, setAiProcessing] = useState(false);
+  const [adaptiveRecommendations, setAdaptiveRecommendations] = useState<string[]>([]);
 
   const updateProfile = (updates: Partial<UserProfile>) => {
     setProfile(prev => {
@@ -174,16 +218,59 @@ export const OnboardingFlow: React.FC = () => {
       profile.name, profile.email, profile.age, profile.currentLevel,
       profile.primaryGoals.length > 0, profile.learningStyles.length > 0,
       profile.availableTime, profile.motivation.length > 0,
-      profile.devicePreferences.length > 0, profile.targetCertifications.length > 0
+      profile.devicePreferences.length > 0, profile.targetCertifications.length > 0,
+      profile.learningContext.workEnvironment, profile.contentPreferences.topicAreas.length > 0,
+      profile.learningBehavior.studyHabits.length > 0, profile.cognitiveProfile.memoryStrength.length > 0
     ];
     const completed = criticalFields.filter(Boolean).length;
     return Math.round((completed / criticalFields.length) * 100);
+  };
+
+  const processAIRecommendations = async (profile: UserProfile) => {
+    setAiProcessing(true);
+    // Simulate AI processing
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    
+    const recommendations = generateAIRecommendations(profile);
+    setAdaptiveRecommendations(recommendations);
+    setAiProcessing(false);
+  };
+
+  const generateAIRecommendations = (profile: UserProfile): string[] => {
+    const recommendations = [];
+    
+    if (profile.primaryGoals.includes('business')) {
+      recommendations.push('Business English Mastery Program');
+      recommendations.push('Professional Communication Workshop');
+    }
+    
+    if (profile.skillLevels.speaking < 5) {
+      recommendations.push('AI-Powered Speaking Coach');
+      recommendations.push('Pronunciation Perfection Course');
+    }
+    
+    if (profile.learningStyles.includes('visual')) {
+      recommendations.push('Visual Learning Path with Infographics');
+      recommendations.push('Interactive Video Lessons');
+    }
+    
+    if (profile.adaptiveSettings.gamificationLevel === 'high') {
+      recommendations.push('Gamified English Adventure');
+      recommendations.push('Achievement-Based Learning Journey');
+    }
+    
+    return recommendations;
   };
 
   const nextStep = () => {
     if (currentStep < TOTAL_STEPS) {
       setCurrentStep(prev => prev + 1);
       updateProfile({ onboardingStep: currentStep + 1 });
+      
+      // Process AI recommendations at certain steps
+      if ([5, 10, 15].includes(currentStep + 1)) {
+        processAIRecommendations(profile);
+      }
     }
   };
 
@@ -205,7 +292,6 @@ export const OnboardingFlow: React.FC = () => {
       recommendedCourses: generateCourseRecommendations(profile)
     });
     console.log('Advanced onboarding completed:', profile);
-    alert('🎉 Your comprehensive English learning profile is complete! We\'ve generated a personalized learning ecosystem tailored specifically for you.');
   };
 
   const calculateEstimatedTime = (profile: UserProfile): string => {
@@ -249,47 +335,38 @@ export const OnboardingFlow: React.FC = () => {
       onBack: prevStep,
       currentStep,
       totalSteps: TOTAL_STEPS,
+      aiProcessing,
+      adaptiveRecommendations,
     };
 
     switch (currentStep) {
-      case 1:
-        return <WelcomeStep onNext={nextStep} currentStep={currentStep} totalSteps={TOTAL_STEPS} />;
-      case 2:
-        return <BasicInfoStep {...stepProps} />;
-      case 3:
-        return <LanguageBackgroundStep {...stepProps} />;
-      case 4:
-        return <SkillAssessmentStep {...stepProps} />;
-      case 5:
-        return <LearningGoalsStep {...stepProps} />;
-      case 6:
-        return <LearningStyleStep {...stepProps} />;
-      case 7:
-        return <TimeCommitmentStep {...stepProps} />;
-      case 8:
-        return <InterestsStep {...stepProps} />;
-      case 9:
-        return <MotivationStep {...stepProps} />;
-      case 10:
-        return <TechnologyStep {...stepProps} />;
-      case 11:
-        return <PersonalizationStep {...stepProps} />;
-      case 12:
-        return <AssessmentStep {...stepProps} />;
-      case 13:
-        return <CertificationStep {...stepProps} />;
-      case 14:
-        return <SocialLearningStep {...stepProps} />;
-      case 15:
-        return <CompletionStep 
-          profile={profile} 
-          onComplete={completeOnboarding} 
-          onBack={prevStep}
-          currentStep={currentStep}
-          totalSteps={TOTAL_STEPS}
-        />;
-      default:
-        return <WelcomeStep onNext={nextStep} currentStep={currentStep} totalSteps={TOTAL_STEPS} />;
+      case 1: return <WelcomeStep onNext={nextStep} currentStep={currentStep} totalSteps={TOTAL_STEPS} />;
+      case 2: return <BasicInfoStep {...stepProps} />;
+      case 3: return <LanguageBackgroundStep {...stepProps} />;
+      case 4: return <SkillAssessmentStep {...stepProps} />;
+      case 5: return <LearningGoalsStep {...stepProps} />;
+      case 6: return <LearningStyleStep {...stepProps} />;
+      case 7: return <TimeCommitmentStep {...stepProps} />;
+      case 8: return <InterestsStep {...stepProps} />;
+      case 9: return <MotivationStep {...stepProps} />;
+      case 10: return <TechnologyStep {...stepProps} />;
+      case 11: return <PersonalizationStep {...stepProps} />;
+      case 12: return <AssessmentStep {...stepProps} />;
+      case 13: return <CertificationStep {...stepProps} />;
+      case 14: return <SocialLearningStep {...stepProps} />;
+      case 15: return <CognitiveProfileStep {...stepProps} />;
+      case 16: return <BehavioralAnalysisStep {...stepProps} />;
+      case 17: return <ContextualAnalysisStep {...stepProps} />;
+      case 18: return <AdaptivePreferencesStep {...stepProps} />;
+      case 19: return <DashboardPreview {...stepProps} />;
+      case 20: return <CompletionStep 
+        profile={profile} 
+        onComplete={completeOnboarding} 
+        onBack={prevStep}
+        currentStep={currentStep}
+        totalSteps={TOTAL_STEPS}
+      />;
+      default: return <WelcomeStep onNext={nextStep} currentStep={currentStep} totalSteps={TOTAL_STEPS} />;
     }
   };
 
@@ -323,16 +400,16 @@ export const OnboardingFlow: React.FC = () => {
         </motion.div>
       </div>
 
-      {/* Progress Indicator */}
+      {/* Advanced Progress Indicator */}
       <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-20">
-        <div className="bg-white/20 backdrop-blur-sm rounded-full px-6 py-2">
-          <div className="flex items-center space-x-3">
+        <div className="bg-white/20 backdrop-blur-sm rounded-full px-8 py-3 border border-white/30">
+          <div className="flex items-center space-x-4">
             <div className="text-white text-sm font-medium">
               Step {currentStep} of {TOTAL_STEPS}
             </div>
-            <div className="w-32 h-2 bg-white/30 rounded-full overflow-hidden">
+            <div className="w-40 h-3 bg-white/30 rounded-full overflow-hidden">
               <motion.div
-                className="h-full bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full"
+                className="h-full bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 rounded-full"
                 initial={{ width: 0 }}
                 animate={{ width: `${(currentStep / TOTAL_STEPS) * 100}%` }}
                 transition={{ duration: 0.5 }}
@@ -341,9 +418,24 @@ export const OnboardingFlow: React.FC = () => {
             <div className="text-white text-sm font-medium">
               {Math.round((currentStep / TOTAL_STEPS) * 100)}%
             </div>
+            <div className="text-white/70 text-xs">
+              Profile: {profile.profileCompleteness}%
+            </div>
           </div>
         </div>
       </div>
+
+      {/* AI Processing Indicator */}
+      {aiProcessing && (
+        <div className="absolute top-20 left-1/2 transform -translate-x-1/2 z-20">
+          <div className="bg-purple-600/90 backdrop-blur-sm rounded-lg px-6 py-3 border border-purple-400/50">
+            <div className="flex items-center space-x-3">
+              <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div>
+              <span className="text-white text-sm font-medium">AI Processing Your Profile...</span>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Phone mockup container */}
       <div className="phone-mockup relative z-10">
@@ -363,19 +455,93 @@ export const OnboardingFlow: React.FC = () => {
         </div>
       </div>
 
-      {/* Floating Action Button */}
-      {currentStep > 1 && (
-        <motion.button
-          className="fixed bottom-8 right-8 w-14 h-14 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full shadow-lg flex items-center justify-center text-white text-xl z-30"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={() => setCurrentStep(1)}
+      {/* Advanced Navigation */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
+        <div className="flex items-center space-x-4">
+          {currentStep > 1 && (
+            <motion.button
+              className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-white text-xl border border-white/30"
+              whileHover={{ scale: 1.1, backgroundColor: 'rgba(255,255,255,0.3)' }}
+              whileTap={{ scale: 0.9 }}
+              onClick={prevStep}
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+            >
+              ←
+            </motion.button>
+          )}
+          
+          <div className="bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20">
+            <div className="flex space-x-2">
+              {Array.from({ length: Math.min(5, TOTAL_STEPS) }, (_, index) => {
+                const stepIndex = Math.max(0, currentStep - 3) + index;
+                return (
+                  <div
+                    key={stepIndex}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      stepIndex + 1 === currentStep
+                        ? 'bg-yellow-400 w-6'
+                        : stepIndex + 1 < currentStep
+                        ? 'bg-green-400'
+                        : 'bg-white/30'
+                    }`}
+                  />
+                );
+              })}
+            </div>
+          </div>
+
+          {currentStep < TOTAL_STEPS && (
+            <motion.button
+              className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full shadow-lg flex items-center justify-center text-white text-xl border border-white/30"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={nextStep}
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+            >
+              →
+            </motion.button>
+          )}
+        </div>
+      </div>
+
+      {/* Floating Action Menu */}
+      {currentStep > 3 && (
+        <motion.div
+          className="fixed bottom-8 right-8 z-30"
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
-          transition={{ delay: 0.5 }}
+          transition={{ delay: 1 }}
         >
-          🏠
-        </motion.button>
+          <div className="flex flex-col space-y-3">
+            <motion.button
+              className="w-12 h-12 bg-blue-600 rounded-full shadow-lg flex items-center justify-center text-white text-lg"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              title="View Progress"
+            >
+              📊
+            </motion.button>
+            <motion.button
+              className="w-12 h-12 bg-green-600 rounded-full shadow-lg flex items-center justify-center text-white text-lg"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              title="AI Recommendations"
+            >
+              🤖
+            </motion.button>
+            <motion.button
+              className="w-12 h-12 bg-purple-600 rounded-full shadow-lg flex items-center justify-center text-white text-lg"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => setCurrentStep(1)}
+              title="Start Over"
+            >
+              🏠
+            </motion.button>
+          </div>
+        </motion.div>
       )}
     </div>
   );

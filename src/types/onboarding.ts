@@ -135,6 +135,42 @@ export interface UserProfile {
   learningStyleAssessment: string[];
   personalityType: string;
   cognitivePreferences: string[];
+
+  // Advanced Profiling Data
+  learningContext: {
+    workEnvironment: string;
+    dailyEnglishUsage: string;
+    communicationNeeds: string[];
+    professionalRequirements: string[];
+    personalCircumstances: string[];
+  };
+
+  // Detailed Preferences
+  contentPreferences: {
+    topicAreas: string[];
+    difficultyProgression: string;
+    contentFormat: string[];
+    interactivityLevel: string;
+    realWorldRelevance: string;
+  };
+
+  // Behavioral Patterns
+  learningBehavior: {
+    studyHabits: string[];
+    procrastinationTendencies: string;
+    motivationalTriggers: string[];
+    preferredFeedbackFrequency: string;
+    errorToleranceLevel: string;
+  };
+
+  // Cognitive Profile
+  cognitiveProfile: {
+    memoryStrength: string[];
+    processingSpeed: string;
+    attentionSpan: string;
+    learningDisabilities: string[];
+    cognitiveLoadPreference: string;
+  };
 }
 
 export interface LearningPath {
@@ -153,13 +189,19 @@ export interface LearningPath {
   completionRate: number;
   rating: number;
   reviews: number;
+  thumbnail: string;
+  category: string;
+  level: string;
+  instructor: string;
+  price: number;
+  enrolledStudents: number;
 }
 
 export interface CourseModule {
   id: string;
   title: string;
   description: string;
-  type: 'video' | 'interactive' | 'assessment' | 'practice' | 'project';
+  type: 'video' | 'interactive' | 'assessment' | 'practice' | 'project' | 'live_session' | 'quiz' | 'reading';
   duration: string;
   difficulty: number;
   skills: string[];
@@ -167,6 +209,8 @@ export interface CourseModule {
   resources: Resource[];
   activities: Activity[];
   assessments: Assessment[];
+  completionCriteria: string[];
+  learningObjectives: string[];
 }
 
 export interface Badge {
@@ -177,38 +221,47 @@ export interface Badge {
   criteria: string[];
   rarity: 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary';
   points: number;
+  category: string;
+  earnedDate?: string;
+  progress: number;
 }
 
 export interface Resource {
   id: string;
   title: string;
-  type: 'pdf' | 'video' | 'audio' | 'interactive' | 'quiz' | 'game';
+  type: 'pdf' | 'video' | 'audio' | 'interactive' | 'quiz' | 'game' | 'article' | 'infographic';
   url: string;
   duration?: string;
   difficulty: number;
   tags: string[];
+  description: string;
+  thumbnail?: string;
 }
 
 export interface Activity {
   id: string;
   title: string;
-  type: 'speaking' | 'listening' | 'reading' | 'writing' | 'grammar' | 'vocabulary';
+  type: 'speaking' | 'listening' | 'reading' | 'writing' | 'grammar' | 'vocabulary' | 'pronunciation' | 'conversation';
   description: string;
   estimatedTime: string;
   difficulty: number;
   skills: string[];
   interactive: boolean;
+  aiPowered: boolean;
+  collaborativeOptions: boolean;
 }
 
 export interface Assessment {
   id: string;
   title: string;
-  type: 'quiz' | 'speaking' | 'writing' | 'project' | 'peer-review';
+  type: 'quiz' | 'speaking' | 'writing' | 'project' | 'peer-review' | 'adaptive' | 'diagnostic';
   questions: number;
   timeLimit: string;
   passingScore: number;
   retakePolicy: string;
   weight: number;
+  adaptiveScoring: boolean;
+  realTimefeedback: boolean;
 }
 
 export interface OnboardingStep {
@@ -219,7 +272,30 @@ export interface OnboardingStep {
   component: React.ComponentType<any>;
   estimatedTime: string;
   importance: 'critical' | 'important' | 'optional';
-  category: 'basic' | 'assessment' | 'preferences' | 'goals' | 'personalization';
+  category: 'basic' | 'assessment' | 'preferences' | 'goals' | 'personalization' | 'advanced';
   completionCriteria: string[];
   dependencies: number[];
+  dataCollected: string[];
+  aiProcessing: boolean;
+}
+
+export interface PersonalizationEngine {
+  contextData: {
+    userBehavior: any[];
+    performanceMetrics: any[];
+    engagementPatterns: any[];
+    learningVelocity: number;
+  };
+  adaptiveAlgorithms: {
+    contentRecommendation: boolean;
+    difficultyAdjustment: boolean;
+    pathOptimization: boolean;
+    scheduleAdaptation: boolean;
+  };
+  realTimeProcessing: {
+    responseAnalysis: boolean;
+    emotionalStateDetection: boolean;
+    cognitiveLoadMonitoring: boolean;
+    adaptiveIntervention: boolean;
+  };
 }
