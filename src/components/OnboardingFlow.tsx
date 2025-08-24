@@ -1,30 +1,21 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { UserProfile } from '../types/onboarding';
-import { ProgressBar } from './ProgressBar';
 import { WelcomeStep } from './steps/WelcomeStep';
 import { BasicInfoStep } from './steps/BasicInfoStep';
 import { SkillLevelStep } from './steps/SkillLevelStep';
 import { GoalsStep } from './steps/GoalsStep';
-import { LearningStyleStep } from './steps/LearningStyleStep';
-import { TimeCommitmentStep } from './steps/TimeCommitmentStep';
-import { InterestsStep } from './steps/InterestsStep';
-import { SkillFocusStep } from './steps/SkillFocusStep';
-import { MotivationStep } from './steps/MotivationStep';
 import { CompletionStep } from './steps/CompletionStep';
 
-const TOTAL_STEPS = 10;
+const TOTAL_STEPS = 5;
 
 export const OnboardingFlow: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [profile, setProfile] = useState<UserProfile>({
-    // Basic Information
     name: '',
     age: '',
     nativeLanguage: '',
     currentLocation: '',
-    
-    // Skill Assessment
     overallLevel: 'beginner',
     skillLevels: {
       speaking: 1,
@@ -34,39 +25,27 @@ export const OnboardingFlow: React.FC = () => {
       grammar: 1,
       vocabulary: 1,
     },
-    
-    // Learning Goals & Motivation
     primaryGoals: [],
     specificObjectives: [],
     timeframe: '',
     motivation: [],
-    
-    // Learning Preferences
     learningStyles: [],
     preferredActivities: [],
     contentTypes: [],
     difficultyPreference: '',
-    
-    // Schedule & Commitment
     availableTime: '',
     preferredSchedule: [],
     studyDuration: '',
     reminderPreferences: [],
-    
-    // Interests & Personalization
     interests: [],
     topics: [],
     culturalPreferences: [],
-    
-    // Adaptive Features
     adaptiveSettings: {
       autoAdjustDifficulty: true,
       personalizedRecommendations: true,
       gamificationLevel: 'moderate',
       feedbackStyle: 'encouraging',
     },
-    
-    // Progress Tracking
     completionPercentage: 0,
     onboardingStep: 1,
   });
@@ -95,8 +74,7 @@ export const OnboardingFlow: React.FC = () => {
       onboardingStep: TOTAL_STEPS 
     });
     console.log('Onboarding completed with profile:', profile);
-    // Here you would typically save the profile and redirect to the main app
-    alert('🎉 Onboarding completed! Your personalized learning journey begins now.');
+    alert('🎉 Welcome to EnglishMaster! Your personalized learning journey begins now.');
   };
 
   const renderStep = () => {
@@ -105,11 +83,13 @@ export const OnboardingFlow: React.FC = () => {
       onUpdate: updateProfile,
       onNext: nextStep,
       onBack: prevStep,
+      currentStep,
+      totalSteps: TOTAL_STEPS,
     };
 
     switch (currentStep) {
       case 1:
-        return <WelcomeStep onNext={nextStep} />;
+        return <WelcomeStep onNext={nextStep} currentStep={currentStep} totalSteps={TOTAL_STEPS} />;
       case 2:
         return <BasicInfoStep {...stepProps} />;
       case 3:
@@ -117,48 +97,44 @@ export const OnboardingFlow: React.FC = () => {
       case 4:
         return <GoalsStep {...stepProps} />;
       case 5:
-        return <LearningStyleStep {...stepProps} />;
-      case 6:
-        return <TimeCommitmentStep {...stepProps} />;
-      case 7:
-        return <InterestsStep {...stepProps} />;
-      case 8:
-        return <SkillFocusStep {...stepProps} />;
-      case 9:
-        return <MotivationStep {...stepProps} />;
-      case 10:
         return <CompletionStep 
           profile={profile} 
           onComplete={completeOnboarding} 
-          onBack={prevStep} 
+          onBack={prevStep}
+          currentStep={currentStep}
+          totalSteps={TOTAL_STEPS}
         />;
       default:
-        return <WelcomeStep onNext={nextStep} />;
+        return <WelcomeStep onNext={nextStep} currentStep={currentStep} totalSteps={TOTAL_STEPS} />;
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 left-20 w-72 h-72 bg-white/5 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-white/3 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+    <div className="min-h-screen bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500 flex items-center justify-center p-4">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-20 left-20 w-32 h-32 bg-white/10 rounded-full blur-xl animate-pulse" />
+        <div className="absolute bottom-20 right-20 w-48 h-48 bg-white/5 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-yellow-300/20 rounded-full blur-xl animate-pulse" style={{ animationDelay: '2s' }} />
+        <div className="absolute bottom-1/3 right-1/3 w-36 h-36 bg-pink-300/10 rounded-full blur-xl animate-pulse" style={{ animationDelay: '3s' }} />
       </div>
 
-      <div className="relative z-10">
-        {/* Step Content */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentStep}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
-          >
-            {renderStep()}
-          </motion.div>
-        </AnimatePresence>
+      {/* Phone mockup container */}
+      <div className="phone-mockup relative z-10">
+        <div className="phone-screen">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentStep}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="h-full"
+            >
+              {renderStep()}
+            </motion.div>
+          </AnimatePresence>
+        </div>
       </div>
     </div>
   );
