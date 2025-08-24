@@ -3,20 +3,39 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { UserProfile } from '../types/onboarding';
 import { WelcomeStep } from './steps/WelcomeStep';
 import { BasicInfoStep } from './steps/BasicInfoStep';
-import { SkillLevelStep } from './steps/SkillLevelStep';
-import { GoalsStep } from './steps/GoalsStep';
+import { LanguageBackgroundStep } from './steps/LanguageBackgroundStep';
+import { SkillAssessmentStep } from './steps/SkillAssessmentStep';
+import { LearningGoalsStep } from './steps/LearningGoalsStep';
+import { LearningStyleStep } from './steps/LearningStyleStep';
+import { TimeCommitmentStep } from './steps/TimeCommitmentStep';
+import { InterestsStep } from './steps/InterestsStep';
+import { MotivationStep } from './steps/MotivationStep';
+import { TechnologyStep } from './steps/TechnologyStep';
+import { PersonalizationStep } from './steps/PersonalizationStep';
 import { CompletionStep } from './steps/CompletionStep';
 
-const TOTAL_STEPS = 5;
+const TOTAL_STEPS = 12;
 
 export const OnboardingFlow: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [profile, setProfile] = useState<UserProfile>({
+    // Basic Information
     name: '',
     age: '',
+    email: '',
+    location: '',
+    occupation: '',
+    educationLevel: '',
     nativeLanguage: '',
-    currentLocation: '',
-    overallLevel: 'beginner',
+    
+    // Language Background
+    currentLevel: 'beginner',
+    previousExperience: [],
+    languageExposure: '',
+    confidenceLevel: 1,
+    specificChallenges: [],
+    
+    // Detailed Skill Assessment
     skillLevels: {
       speaking: 1,
       listening: 1,
@@ -24,34 +43,86 @@ export const OnboardingFlow: React.FC = () => {
       writing: 1,
       grammar: 1,
       vocabulary: 1,
+      pronunciation: 1,
+      comprehension: 1,
     },
+    
+    // Learning Goals & Objectives
     primaryGoals: [],
     specificObjectives: [],
+    targetProficiency: '',
     timeframe: '',
-    motivation: [],
+    urgency: '',
+    successMetrics: [],
+    
+    // Learning Preferences
     learningStyles: [],
     preferredActivities: [],
     contentTypes: [],
     difficultyPreference: '',
+    feedbackStyle: '',
+    
+    // Schedule & Commitment
     availableTime: '',
     preferredSchedule: [],
     studyDuration: '',
+    consistencyLevel: '',
     reminderPreferences: [],
+    
+    // Interests & Context
     interests: [],
     topics: [],
     culturalPreferences: [],
+    realWorldApplications: [],
+    
+    // Motivation & Psychology
+    motivation: [],
+    learningBarriers: [],
+    previousFailures: [],
+    supportSystem: [],
+    
+    // Technology & Accessibility
+    devicePreferences: [],
+    internetConnection: '',
+    accessibilityNeeds: [],
+    techComfort: 5,
+    
+    // Advanced Personalization
     adaptiveSettings: {
       autoAdjustDifficulty: true,
       personalizedRecommendations: true,
       gamificationLevel: 'moderate',
-      feedbackStyle: 'encouraging',
+      socialLearning: true,
+      aiTutorPersonality: 'encouraging',
+      contentPersonalization: 'adaptive',
     },
+    
+    // Progress Tracking
     completionPercentage: 0,
     onboardingStep: 1,
+    profileCompleteness: 0,
+    learningPathGenerated: false,
   });
 
   const updateProfile = (updates: Partial<UserProfile>) => {
-    setProfile(prev => ({ ...prev, ...updates }));
+    setProfile(prev => {
+      const updated = { ...prev, ...updates };
+      updated.completionPercentage = Math.round((currentStep / TOTAL_STEPS) * 100);
+      updated.profileCompleteness = calculateProfileCompleteness(updated);
+      return updated;
+    });
+  };
+
+  const calculateProfileCompleteness = (profile: UserProfile): number => {
+    const fields = [
+      profile.name, profile.age, profile.currentLevel,
+      profile.primaryGoals.length > 0,
+      profile.learningStyles.length > 0,
+      profile.availableTime,
+      profile.motivation.length > 0
+    ];
+    const completed = fields.filter(Boolean).length;
+    return Math.round((completed / fields.length) * 100);
   };
 
   const nextStep = () => {
@@ -71,10 +142,11 @@ export const OnboardingFlow: React.FC = () => {
   const completeOnboarding = () => {
     updateProfile({ 
       completionPercentage: 100,
-      onboardingStep: TOTAL_STEPS 
+      onboardingStep: TOTAL_STEPS,
+      learningPathGenerated: true
     });
-    console.log('Onboarding completed with profile:', profile);
-    alert('🎉 Welcome to EnglishMaster! Your personalized learning journey begins now.');
+    console.log('Comprehensive onboarding completed:', profile);
+    alert('🎉 Your personalized English learning journey is ready! We\'ve created a custom learning path based on your detailed profile.');
   };
 
   const renderStep = () => {
@@ -93,10 +165,24 @@ export const OnboardingFlow: React.FC = () => {
       case 2:
         return <BasicInfoStep {...stepProps} />;
       case 3:
-        return <SkillLevelStep {...stepProps} />;
+        return <LanguageBackgroundStep {...stepProps} />;
       case 4:
-        return <GoalsStep {...stepProps} />;
+        return <SkillAssessmentStep {...stepProps} />;
       case 5:
+        return <LearningGoalsStep {...stepProps} />;
+      case 6:
+        return <LearningStyleStep {...stepProps} />;
+      case 7:
+        return <TimeCommitmentStep {...stepProps} />;
+      case 8:
+        return <InterestsStep {...stepProps} />;
+      case 9:
+        return <MotivationStep {...stepProps} />;
+      case 10:
+        return <TechnologyStep {...stepProps} />;
+      case 11:
+        return <PersonalizationStep {...stepProps} />;
+      case 12:
         return <CompletionStep 
           profile={profile} 
           onComplete={completeOnboarding} 
@@ -110,7 +196,7 @@ export const OnboardingFlow: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-500 via-purple-600 to-pink-500 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-600 via-purple-600 to-pink-500 flex items-center justify-center p-4">
       {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 left-20 w-32 h-32 bg-white/10 rounded-full blur-xl animate-pulse" />
