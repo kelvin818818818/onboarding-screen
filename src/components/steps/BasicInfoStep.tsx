@@ -171,9 +171,6 @@ export const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
           <div className="w-3 h-3 bg-gray-300 rounded-full"></div>
         </div>
       </div>
-    </div>
-  );
-};
 
       <motion.div
         className="text-center"
