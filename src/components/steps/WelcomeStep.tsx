@@ -7,6 +7,15 @@ interface WelcomeStepProps {
 }
 
 export const WelcomeStep: React.FC<WelcomeStepProps> = ({ onNext }) => {
+  const features = [
+    { icon: Globe, text: "Global Community" },
+    { icon: Users, text: "Expert Teachers" },
+    { icon: Zap, text: "Fast Progress" },
+    { icon: Trophy, text: "Achievements" },
+    { icon: BookOpen, text: "Rich Content" },
+    { icon: Star, text: "Premium Quality" }
+  ];
+
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
       {/* Skip Button */}
@@ -94,9 +103,6 @@ export const WelcomeStep: React.FC<WelcomeStepProps> = ({ onNext }) => {
           <div className="w-3 h-3 bg-gray-300 rounded-full"></div>
         </div>
       </div>
-    </div>
-  );
-};
 
       <motion.div
         initial={{ opacity: 0, y: -20 }}
