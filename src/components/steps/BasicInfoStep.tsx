@@ -49,7 +49,132 @@ export const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
   };
 
   return (
-    <div className="space-y-8">
+    <div className="min-h-screen flex items-center justify-center p-4">
+      {/* Skip Button */}
+      <button 
+        onClick={onNext}
+        className="btn-skip absolute top-8 right-8 z-10"
+      >
+        Skip
+      </button>
+
+      <div className="mobile-card w-full max-w-sm space-y-6">
+        {/* Character Illustration */}
+        <motion.div
+          className="character-container"
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.8 }}
+        >
+          <div className="character-illustration">
+            👋
+          </div>
+          <motion.div
+            className="absolute top-6 right-6 text-2xl"
+            animate={{ rotate: [0, 15, -15, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            🎯
+          </motion.div>
+        </motion.div>
+
+        {/* Title */}
+        <motion.div
+          className="text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <h2 className="text-2xl font-bold text-gray-800 mb-2">Tell us about yourself</h2>
+          <p className="text-gray-600">This helps us personalize your experience</p>
+        </motion.div>
+
+        {/* Form Fields */}
+        <motion.div
+          className="space-y-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          {/* Name Input */}
+          <div>
+            <label className="block text-gray-700 font-medium mb-2">
+              What's your name? *
+            </label>
+            <input
+              type="text"
+              value={profile.name}
+              onChange={(e) => onUpdate({ name: e.target.value })}
+              placeholder="Enter your first name"
+              className={`w-full px-4 py-4 rounded-2xl bg-gray-50 border-2 transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-indigo-400/30 ${
+                errors.name ? 'border-red-400' : 'border-gray-200 focus:border-indigo-400'
+              }`}
+            />
+            {errors.name && (
+              <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+            )}
+          </div>
+
+          {/* Age Range */}
+          <div>
+            <label className="block text-gray-700 font-medium mb-3">
+              What's your age range? *
+            </label>
+            <div className="grid grid-cols-3 gap-2">
+              {ageRanges.map((age) => (
+                <motion.button
+                  key={age}
+                  onClick={() => onUpdate({ age })}
+                  className={`p-3 rounded-xl text-sm font-medium transition-all duration-200 ${
+                    profile.age === age
+                      ? 'bg-indigo-500 text-white shadow-lg ring-4 ring-indigo-400/30'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200'
+                  }`}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  {age}
+                </motion.button>
+              ))}
+            </div>
+            {errors.age && (
+              <p className="text-red-500 text-sm mt-1">{errors.age}</p>
+            )}
+          </div>
+        </motion.div>
+
+        {/* Navigation */}
+        <motion.div
+          className="flex justify-between pt-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+        >
+          <button
+            onClick={onBack}
+            className="btn-secondary px-6 py-3"
+          >
+            Back
+          </button>
+          <button
+            onClick={validateAndNext}
+            className="btn-primary px-6 py-3"
+          >
+            Continue
+          </button>
+        </motion.div>
+
+        {/* Progress Dots */}
+        <div className="flex justify-center space-x-2 pt-4">
+          <div className="w-3 h-3 bg-gray-300 rounded-full"></div>
+          <div className="w-3 h-3 bg-indigo-500 rounded-full"></div>
+          <div className="w-3 h-3 bg-gray-300 rounded-full"></div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
       <motion.div
         className="text-center"
         initial={{ opacity: 0, y: -20 }}

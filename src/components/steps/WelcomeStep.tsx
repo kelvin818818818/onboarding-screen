@@ -7,17 +7,97 @@ interface WelcomeStepProps {
 }
 
 export const WelcomeStep: React.FC<WelcomeStepProps> = ({ onNext }) => {
-  const features = [
-    { icon: BookOpen, text: 'Personalized Learning' },
-    { icon: Globe, text: 'Real-world Conversations' },
-    { icon: Users, text: 'Interactive Community' },
-    { icon: Zap, text: 'AI-Powered Lessons' },
-    { icon: Star, text: 'Gamified Experience' },
-    { icon: Trophy, text: 'Track Progress' },
-  ];
-
   return (
-    <div className="text-center space-y-8">
+    <div className="min-h-screen flex items-center justify-center p-4">
+      {/* Skip Button */}
+      <button 
+        onClick={onNext}
+        className="btn-skip absolute top-8 right-8 z-10"
+      >
+        Skip
+      </button>
+
+      <div className="mobile-card text-center space-y-8 w-full max-w-sm">
+        {/* Character Illustration */}
+        <motion.div
+          className="character-container"
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <div className="character-illustration">
+            👨‍🎓
+          </div>
+          {/* Floating elements around character */}
+          <motion.div
+            className="absolute top-4 right-4 text-2xl"
+            animate={{ y: [-5, 5, -5] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            📚
+          </motion.div>
+          <motion.div
+            className="absolute bottom-6 left-6 text-2xl"
+            animate={{ y: [5, -5, 5] }}
+            transition={{ duration: 2.5, repeat: Infinity }}
+          >
+            🌟
+          </motion.div>
+          <motion.div
+            className="absolute top-8 left-4 text-xl"
+            animate={{ rotate: [0, 10, -10, 0] }}
+            transition={{ duration: 3, repeat: Infinity }}
+          >
+            💡
+          </motion.div>
+        </motion.div>
+
+        {/* Title and Description */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          <h1 className="text-3xl font-bold text-gray-800 mb-4">
+            Learn English
+            <br />
+            <span className="gradient-text">Anywhere, Anytime</span>
+          </h1>
+          
+          <p className="text-gray-600 text-lg leading-relaxed mb-8">
+            Accelerate your English learning journey with personalized lessons and interactive activities.
+          </p>
+        </motion.div>
+
+        {/* Action Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+        >
+          <button
+            onClick={onNext}
+            className="btn-primary w-full text-lg mb-4"
+          >
+            Start Learning! →
+          </button>
+          
+          <p className="text-gray-500 text-sm">
+            Join thousands of learners worldwide
+          </p>
+        </motion.div>
+
+        {/* Progress Dots */}
+        <div className="flex justify-center space-x-2 pt-4">
+          <div className="w-3 h-3 bg-indigo-500 rounded-full"></div>
+          <div className="w-3 h-3 bg-gray-300 rounded-full"></div>
+          <div className="w-3 h-3 bg-gray-300 rounded-full"></div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
