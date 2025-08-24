@@ -371,75 +371,91 @@ export const OnboardingFlow: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center p-4 relative overflow-hidden">
-      {/* Advanced Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-20 w-32 h-32 bg-white/10 rounded-full blur-xl animate-pulse" />
-        <div className="absolute bottom-20 right-20 w-48 h-48 bg-white/5 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }} />
-        <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-yellow-300/20 rounded-full blur-xl animate-pulse" style={{ animationDelay: '2s' }} />
-        <div className="absolute bottom-1/3 right-1/3 w-36 h-36 bg-pink-300/10 rounded-full blur-xl animate-pulse" style={{ animationDelay: '3s' }} />
-        
-        {/* Geometric Patterns */}
-        <div className="absolute top-10 right-10 w-16 h-16 border-2 border-white/20 rotate-45 animate-spin" style={{ animationDuration: '20s' }} />
-        <div className="absolute bottom-10 left-10 w-12 h-12 border-2 border-white/30 rotate-12 animate-bounce" />
-        
-        {/* Floating Icons */}
-        <motion.div
-          className="absolute top-1/4 right-1/4 text-2xl"
-          animate={{ y: [-10, 10, -10], rotate: [0, 5, -5, 0] }}
-          transition={{ duration: 4, repeat: Infinity }}
-        >
-          📚
-        </motion.div>
-        <motion.div
-          className="absolute bottom-1/4 left-1/4 text-2xl"
-          animate={{ y: [10, -10, 10], rotate: [0, -5, 5, 0] }}
-          transition={{ duration: 3, repeat: Infinity }}
-        >
-          🎓
-        </motion.div>
-      </div>
-
-      {/* Advanced Progress Indicator */}
-      <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-20">
-        <div className="bg-white/20 backdrop-blur-sm rounded-full px-8 py-3 border border-white/30">
-          <div className="flex items-center space-x-4">
-            <div className="text-white text-sm font-medium">
-              Step {currentStep} of {TOTAL_STEPS}
+    <div className="learning-platform">
+      {/* Advanced Dashboard Container */}
+      <div className="dashboard-container">
+        {/* Top Navigation Bar */}
+        <div className="dashboard-nav">
+          <div className="nav-brand">🎓 EnglishMaster Pro</div>
+          <div className="nav-menu">
+            <a href="#" className="nav-item active">Onboarding</a>
+            <a href="#" className="nav-item">Courses</a>
+            <a href="#" className="nav-item">Progress</a>
+            <a href="#" className="nav-item">Community</a>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="text-white text-sm">
+              Profile: {profile.profileCompleteness}% Complete
             </div>
-            <div className="w-40 h-3 bg-white/30 rounded-full overflow-hidden">
+            <div className="w-32 h-2 bg-white/20 rounded-full overflow-hidden">
               <motion.div
-                className="h-full bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 rounded-full"
+                className="h-full bg-gradient-to-r from-green-400 to-blue-500 rounded-full"
                 initial={{ width: 0 }}
-                animate={{ width: `${(currentStep / TOTAL_STEPS) * 100}%` }}
+                animate={{ width: `${profile.profileCompleteness}%` }}
                 transition={{ duration: 0.5 }}
               />
             </div>
-            <div className="text-white text-sm font-medium">
-              {Math.round((currentStep / TOTAL_STEPS) * 100)}%
+          </div>
+        </div>
+
+        {/* Advanced Progress Tracking */}
+        <div className="learning-card mb-8">
+          <div className="p-6">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-2xl font-bold text-gray-800">Learning Journey Setup</h2>
+              <div className="text-sm text-gray-600">
+                Step {currentStep} of {TOTAL_STEPS}
+              </div>
             </div>
-            <div className="text-white/70 text-xs">
-              Profile: {profile.profileCompleteness}%
+            
+            {/* Complex Progress Visualization */}
+            <div className="progress-container">
+              <div className="flex justify-between text-sm text-white/80 mb-2">
+                <span>Progress</span>
+                <span>{Math.round((currentStep / TOTAL_STEPS) * 100)}%</span>
+              </div>
+              <div className="progress-bar">
+                <motion.div
+                  className="progress-fill"
+                  initial={{ width: 0 }}
+                  animate={{ width: `${(currentStep / TOTAL_STEPS) * 100}%` }}
+                  transition={{ duration: 0.5 }}
+                />
+              </div>
+              
+              {/* Step Categories */}
+              <div className="flex justify-between mt-4 text-xs text-white/60">
+                <span className={currentStep <= 4 ? 'text-white font-semibold' : ''}>Basic Info</span>
+                <span className={currentStep > 4 && currentStep <= 8 ? 'text-white font-semibold' : ''}>Assessment</span>
+                <span className={currentStep > 8 && currentStep <= 12 ? 'text-white font-semibold' : ''}>Preferences</span>
+                <span className={currentStep > 12 && currentStep <= 16 ? 'text-white font-semibold' : ''}>Advanced</span>
+                <span className={currentStep > 16 ? 'text-white font-semibold' : ''}>Completion</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* AI Processing Indicator */}
-      {aiProcessing && (
-        <div className="absolute top-20 left-1/2 transform -translate-x-1/2 z-20">
-          <div className="bg-purple-600/90 backdrop-blur-sm rounded-lg px-6 py-3 border border-purple-400/50">
-            <div className="flex items-center space-x-3">
-              <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div>
-              <span className="text-white text-sm font-medium">AI Processing Your Profile...</span>
+        {/* AI Processing Indicator */}
+        {aiProcessing && (
+          <motion.div
+            className="learning-card mb-6"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            <div className="p-4 bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-lg">
+              <div className="flex items-center gap-3">
+                <div className="animate-spin rounded-full h-6 w-6 border-2 border-white border-t-transparent"></div>
+                <div>
+                  <div className="font-semibold">AI Processing Your Profile</div>
+                  <div className="text-sm opacity-90">Analyzing learning patterns and generating personalized recommendations...</div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
 
-      {/* Phone mockup container */}
-      <div className="phone-mockup relative z-10">
-        <div className="phone-screen">
+        {/* Main Content Area */}
+        <div className="learning-card">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentStep}
@@ -447,102 +463,83 @@ export const OnboardingFlow: React.FC = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="h-full"
+              className="p-8"
             >
               {renderStep()}
             </motion.div>
           </AnimatePresence>
         </div>
-      </div>
 
-      {/* Advanced Navigation */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
-        <div className="flex items-center space-x-4">
-          {currentStep > 1 && (
-            <motion.button
-              className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-white text-xl border border-white/30"
-              whileHover={{ scale: 1.1, backgroundColor: 'rgba(255,255,255,0.3)' }}
-              whileTap={{ scale: 0.9 }}
-              onClick={prevStep}
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-            >
-              ←
-            </motion.button>
-          )}
-          
-          <div className="bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20">
-            <div className="flex space-x-2">
-              {Array.from({ length: Math.min(5, TOTAL_STEPS) }, (_, index) => {
-                const stepIndex = Math.max(0, currentStep - 3) + index;
-                return (
-                  <div
-                    key={stepIndex}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                      stepIndex + 1 === currentStep
-                        ? 'bg-yellow-400 w-6'
-                        : stepIndex + 1 < currentStep
-                        ? 'bg-green-400'
-                        : 'bg-white/30'
-                    }`}
-                  />
-                );
-              })}
-            </div>
+        {/* Advanced Navigation Controls */}
+        <div className="flex justify-between items-center mt-8">
+          <div className="flex items-center gap-4">
+            {currentStep > 1 && (
+              <motion.button
+                className="btn-secondary"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={prevStep}
+              >
+                ← Previous
+              </motion.button>
+            )}
           </div>
 
-          {currentStep < TOTAL_STEPS && (
-            <motion.button
-              className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full shadow-lg flex items-center justify-center text-white text-xl border border-white/30"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={nextStep}
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-            >
-              →
-            </motion.button>
-          )}
+          <div className="flex items-center gap-2">
+            {Array.from({ length: Math.min(10, TOTAL_STEPS) }, (_, index) => {
+              const stepIndex = Math.max(0, currentStep - 5) + index;
+              return (
+                <div
+                  key={stepIndex}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    stepIndex + 1 === currentStep
+                      ? 'bg-blue-400 w-8'
+                      : stepIndex + 1 < currentStep
+                      ? 'bg-green-400'
+                      : 'bg-white/30'
+                  }`}
+                />
+              );
+            })}
+          </div>
+
+          <div className="flex items-center gap-4">
+            {currentStep < TOTAL_STEPS && (
+              <motion.button
+                className="btn-primary"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={nextStep}
+              >
+                Continue →
+              </motion.button>
+            )}
+          </div>
         </div>
-      </div>
 
-      {/* Floating Action Menu */}
-      {currentStep > 3 && (
-        <motion.div
-          className="fixed bottom-8 right-8 z-30"
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ delay: 1 }}
-        >
-          <div className="flex flex-col space-y-3">
-            <motion.button
-              className="w-12 h-12 bg-blue-600 rounded-full shadow-lg flex items-center justify-center text-white text-lg"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              title="View Progress"
-            >
-              📊
-            </motion.button>
-            <motion.button
-              className="w-12 h-12 bg-green-600 rounded-full shadow-lg flex items-center justify-center text-white text-lg"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              title="AI Recommendations"
-            >
-              🤖
-            </motion.button>
-            <motion.button
-              className="w-12 h-12 bg-purple-600 rounded-full shadow-lg flex items-center justify-center text-white text-lg"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={() => setCurrentStep(1)}
-              title="Start Over"
-            >
-              🏠
-            </motion.button>
-          </div>
-        </motion.div>
-      )}
+        {/* Adaptive Recommendations Panel */}
+        {adaptiveRecommendations.length > 0 && (
+          <motion.div
+            className="learning-card mt-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            <div className="p-6">
+              <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                🤖 AI Recommendations
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {adaptiveRecommendations.map((rec, index) => (
+                  <div key={index} className="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-lg border border-blue-200">
+                    <div className="font-semibold text-gray-800 mb-1">{rec}</div>
+                    <div className="text-sm text-gray-600">Personalized based on your profile</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </div>
     </div>
   );
 };
