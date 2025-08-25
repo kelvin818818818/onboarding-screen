@@ -105,6 +105,34 @@ export const MotivationStep: React.FC<MotivationStepProps> = ({
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
       >
+        <button 
+          onClick={onNext}
+          style={{
+            position: 'absolute',
+            top: '1rem',
+            right: '1rem',
+            background: 'none',
+            border: 'none',
+            color: '#6b7280',
+            fontSize: '0.875rem',
+            cursor: 'pointer',
+            zIndex: 10,
+            padding: '0.5rem',
+            borderRadius: '6px',
+            transition: 'all 0.2s ease'
+          }}
+          onMouseOver={(e) => {
+            e.currentTarget.style.background = '#f3f4f6';
+            e.currentTarget.style.color = '#374151';
+          }}
+          onMouseOut={(e) => {
+            e.currentTarget.style.background = 'none';
+            e.currentTarget.style.color = '#6b7280';
+          }}
+        >
+          Skip
+        </button>
+
         <div>
           <h3 className="text-white font-semibold mb-6 text-center">
             What drives you to learn English? (Select all that apply)

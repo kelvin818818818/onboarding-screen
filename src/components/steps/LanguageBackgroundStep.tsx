@@ -61,7 +61,34 @@ export const LanguageBackgroundStep: React.FC<LanguageBackgroundStepProps> = ({
 
   return (
     <div className="card-content">
-      <button className="skip-btn" onClick={onNext}>Skip</button>
+      <button 
+        className="skip-btn" 
+        onClick={onNext}
+        style={{
+          position: 'absolute',
+          top: '1rem',
+          right: '1rem',
+          background: 'none',
+          border: 'none',
+          color: '#6b7280',
+          fontSize: '0.875rem',
+          cursor: 'pointer',
+          zIndex: 10,
+          padding: '0.5rem',
+          borderRadius: '6px',
+          transition: 'all 0.2s ease'
+        }}
+        onMouseOver={(e) => {
+          e.currentTarget.style.background = '#f3f4f6';
+          e.currentTarget.style.color = '#374151';
+        }}
+        onMouseOut={(e) => {
+          e.currentTarget.style.background = 'none';
+          e.currentTarget.style.color = '#6b7280';
+        }}
+      >
+        Skip
+      </button>
 
       <div>
         <motion.div
