@@ -117,6 +117,22 @@ export const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
 
       {/* Main Content */}
       <div style={{ flex: 1, padding: '2rem', maxWidth: '800px', margin: '0 auto', width: '100%' }}>
+        <button 
+          onClick={onNext}
+          style={{ 
+            position: 'absolute', 
+            top: '1rem', 
+            right: '1rem', 
+            background: 'none', 
+            border: 'none', 
+            color: 'rgba(255,255,255,0.8)', 
+            fontSize: '0.875rem', 
+            cursor: 'pointer' 
+          }}
+        >
+          Skip
+        </button>
+
         {/* Character Illustration */}
         <div style={{ textAlign: 'center', margin: '2rem 0' }}>
           <div style={{ 
@@ -224,6 +240,21 @@ export const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
               💡
             </motion.div>
           </div>
+        </div>
+
+        {/* Basic Information Form */}
+        <div className="form-section">
+          <label className="form-label">Full Name *</label>
+          <input
+            type="text"
+            value={profile.name}
+            onChange={(e) => onUpdate({ name: e.target.value })}
+            placeholder="Enter your full name"
+            className={`form-input ${errors.name ? 'error' : ''}`}
+          />
+          {errors.name && (
+            <p className="form-error">{errors.name}</p>
+          )}
         </div>
 
             
@@ -345,7 +376,6 @@ export const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
               </button>
               <button
                 onClick={validateAndNext}
-                disabled={!profile.name.trim() || !profile.email.trim() || !profile.age || !profile.occupation || !profile.educationLevel}
                 className="btn-primary"
                 style={{ flex: 1, marginLeft: '1rem' }}
               >
