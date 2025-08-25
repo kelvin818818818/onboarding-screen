@@ -364,7 +364,5 @@ export const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
             </div>
           </div>
         </div>
-      </div>
-    </div>
   );
 };
