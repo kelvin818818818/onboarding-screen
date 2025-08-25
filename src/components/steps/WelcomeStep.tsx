@@ -11,78 +11,157 @@ export const WelcomeStep: React.FC<WelcomeStepProps> = ({ onNext, currentStep, t
   return (
     <div className="phone-mockup">
       <div className="phone-screen">
-        {/* Header */}
-        <div className="p-6 text-center">
-          <div className="text-sm text-gray-500 mb-2">Welcome to</div>
-          <h1 className="text-2xl font-bold text-gray-800 mb-1">EnglishMaster Pro</h1>
-          <p className="text-gray-600 text-sm">Your AI-powered learning companion</p>
-        </div>
-
-        {/* Character Illustration */}
-        <div className="character-container">
-          <div className="character-main">
-            👨‍🎓
-          </div>
-          <div className="floating-element">📚</div>
-          <div className="floating-element">🌟</div>
-          <div className="floating-element">💡</div>
-          <div className="floating-element">🎯</div>
-        </div>
-
-        {/* Content */}
-        <div className="px-6 text-center">
-          <h2 className="text-xl font-bold text-gray-800 mb-2">
-            Learn English in 3 minutes a day
-          </h2>
-          <p className="text-gray-600 text-sm mb-6 leading-relaxed">
-            Join millions of learners worldwide. Personalized lessons, 
-            real-time feedback, and AI-powered progress tracking.
-          </p>
-
-          {/* Features */}
-          <div className="grid grid-cols-3 gap-4 mb-8">
-            <div className="text-center">
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                <span className="text-xl">🎯</span>
-              </div>
-              <p className="text-xs text-gray-600">Personalized</p>
-            </div>
-            <div className="text-center">
-              <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                <span className="text-xl">📊</span>
-              </div>
-              <p className="text-xs text-gray-600">Track Progress</p>
-            </div>
-            <div className="text-center">
-              <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                <span className="text-xl">🏆</span>
-              </div>
-              <p className="text-xs text-gray-600">Earn Badges</p>
-            </div>
+        {/* Status Bar - Like Speaker App */}
+        <div className="status-bar">
+          <div className="status-time">9:41</div>
+          <div className="status-indicators">
+            <span>📶</span>
+            <span>📶</span>
+            <span>🔋</span>
           </div>
         </div>
 
-        {/* Footer */}
-        <div className="mt-auto p-6">
-          <button
-            onClick={onNext}
-            className="btn-primary w-full mb-4"
-          >
-            Start Learning
-          </button>
+        <div className="card-content">
+          <button className="skip-btn">Skip</button>
           
-          <p className="text-xs text-gray-500 text-center">
-            Already have an account? <span className="text-blue-600">Sign in</span>
-          </p>
-          
-          {/* Progress Dots */}
-          <div className="progress-dots mt-4">
-            {Array.from({ length: totalSteps }, (_, index) => (
-              <div
-                key={index}
-                className={`progress-dot ${index + 1 === currentStep ? 'active' : index < currentStep ? 'completed' : ''}`}
-              />
-            ))}
+          {/* Header */}
+          <div className="card-header">
+            <div style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.5rem' }}>
+              Welcome to
+            </div>
+            <h1 style={{ fontSize: '1.75rem', fontWeight: '800', color: '#1f2937', marginBottom: '0.5rem' }}>
+              Speaker
+            </h1>
+            <p style={{ color: '#6b7280', fontSize: '0.875rem' }}>
+              Language Learning App
+            </p>
+          </div>
+
+          {/* Character Illustration - Like Speaker Characters */}
+          <div className="character-container">
+            <div className="character-main">
+              👨‍🎓
+            </div>
+            <div className="floating-element">🇬🇧</div>
+            <div className="floating-element">🇫🇷</div>
+            <div className="floating-element">🇩🇪</div>
+            <div className="floating-element">💬</div>
+          </div>
+
+          {/* Main Content */}
+          <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+            <h2 className="card-title" style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>
+              Learn a language in 3 minutes a day
+            </h2>
+            <p style={{ color: '#6b7280', fontSize: '0.875rem', lineHeight: '1.5', marginBottom: '2rem' }}>
+              Join millions of learners worldwide. Personalized lessons, 
+              real-time feedback, and AI-powered progress tracking.
+            </p>
+
+            {/* Features Grid */}
+            <div className="option-grid" style={{ marginBottom: '2rem' }}>
+              <div style={{ textAlign: 'center', padding: '1rem' }}>
+                <div style={{ 
+                  width: '48px', 
+                  height: '48px', 
+                  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', 
+                  borderRadius: '50%', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  margin: '0 auto 0.75rem',
+                  color: 'white',
+                  fontSize: '1.25rem'
+                }}>
+                  🎯
+                </div>
+                <p style={{ fontSize: '0.75rem', color: '#6b7280', fontWeight: '500' }}>
+                  Personalized Learning
+                </p>
+              </div>
+              <div style={{ textAlign: 'center', padding: '1rem' }}>
+                <div style={{ 
+                  width: '48px', 
+                  height: '48px', 
+                  background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', 
+                  borderRadius: '50%', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  margin: '0 auto 0.75rem',
+                  color: 'white',
+                  fontSize: '1.25rem'
+                }}>
+                  📊
+                </div>
+                <p style={{ fontSize: '0.75rem', color: '#6b7280', fontWeight: '500' }}>
+                  Track Progress
+                </p>
+              </div>
+              <div style={{ textAlign: 'center', padding: '1rem' }}>
+                <div style={{ 
+                  width: '48px', 
+                  height: '48px', 
+                  background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)', 
+                  borderRadius: '50%', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  margin: '0 auto 0.75rem',
+                  color: 'white',
+                  fontSize: '1.25rem'
+                }}>
+                  🏆
+                </div>
+                <p style={{ fontSize: '0.75rem', color: '#6b7280', fontWeight: '500' }}>
+                  Earn Achievements
+                </p>
+              </div>
+              <div style={{ textAlign: 'center', padding: '1rem' }}>
+                <div style={{ 
+                  width: '48px', 
+                  height: '48px', 
+                  background: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)', 
+                  borderRadius: '50%', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  margin: '0 auto 0.75rem',
+                  color: 'white',
+                  fontSize: '1.25rem'
+                }}>
+                  🤖
+                </div>
+                <p style={{ fontSize: '0.75rem', color: '#6b7280', fontWeight: '500' }}>
+                  AI-Powered
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Footer */}
+          <div className="card-footer">
+            <button
+              onClick={onNext}
+              className="btn-primary"
+              style={{ width: '100%', marginBottom: '1rem', padding: '1rem' }}
+            >
+              Start Learning
+            </button>
+            
+            <p style={{ fontSize: '0.75rem', color: '#6b7280', textAlign: 'center', marginBottom: '1rem' }}>
+              Already have an account? <span style={{ color: '#667eea', fontWeight: '500' }}>Log in</span>
+            </p>
+            
+            {/* Progress Dots */}
+            <div className="progress-dots">
+              {Array.from({ length: totalSteps }, (_, index) => (
+                <div
+                  key={index}
+                  className={`progress-dot ${index + 1 === currentStep ? 'active' : index < currentStep ? 'completed' : ''}`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>

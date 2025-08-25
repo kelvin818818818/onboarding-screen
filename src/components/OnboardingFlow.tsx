@@ -373,130 +373,129 @@ export const OnboardingFlow: React.FC = () => {
 
   return (
     <div className="learning-platform">
-      {/* Professional Navigation Bar */}
-      <div className="professional-nav">
-        <div className="nav-brand">
-          <div className="nav-brand-icon">
-            🎓
-          </div>
-          EnglishMaster Pro
-        </div>
-        
-        <div className="nav-menu">
-          <a href="#" className="nav-item active">
-            <BookOpen size={16} />
-            Onboarding
-          </a>
-          <a href="#" className="nav-item">
-            <Target size={16} />
-            Courses
-          </a>
-          <a href="#" className="nav-item">
-            <BarChart3 size={16} />
-            Progress
-          </a>
-          <a href="#" className="nav-item">
-            <Users size={16} />
-            Community
-          </a>
-        </div>
-        
-        <div className="nav-profile">
-          <div className="profile-info">
-            <div className="profile-name">{profile.name || 'New Learner'}</div>
-            <div className="profile-level">
-              {profile.currentLevel?.charAt(0).toUpperCase() + profile.currentLevel?.slice(1)} Level
-            </div>
-          </div>
-          <div className="profile-avatar">
-            {profile.name ? profile.name.charAt(0).toUpperCase() : 'U'}
-          </div>
-        </div>
-      </div>
-
-      {/* Dashboard Container */}
       <div className="dashboard-container">
-        {/* Professional Progress Section */}
-        <div className="progress-section">
-          <div className="progress-header">
-            <div className="progress-title">Learning Journey Setup</div>
-            <div className="progress-percentage">{Math.round((currentStep / TOTAL_STEPS) * 100)}%</div>
+        {/* Sidebar Navigation - Like Language Learning Dashboard */}
+        <div className="dashboard-sidebar">
+          <div className="sidebar-header">
+            <div className="sidebar-avatar">
+              {profile.name ? profile.name.charAt(0).toUpperCase() : '👤'}
+            </div>
+            <div className="sidebar-user-info">
+              <h3>{profile.name || "Emily's Profile"}</h3>
+              <p>{profile.currentLevel?.charAt(0).toUpperCase() + profile.currentLevel?.slice(1) || 'Beginner'} Level</p>
+            </div>
           </div>
           
-          <div className="progress-bar">
-            <motion.div
-              className="progress-fill"
-              initial={{ width: 0 }}
-              animate={{ width: `${(currentStep / TOTAL_STEPS) * 100}%` }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-            />
-          </div>
+          <nav>
+            <ul className="sidebar-nav">
+              <li className="sidebar-nav-item">
+                <a href="#" className="sidebar-nav-link active">
+                  <span className="sidebar-nav-icon">📚</span>
+                  Onboarding
+                </a>
+              </li>
+              <li className="sidebar-nav-item">
+                <a href="#" className="sidebar-nav-link">
+                  <span className="sidebar-nav-icon">📖</span>
+                  Study Plan
+                </a>
+              </li>
+              <li className="sidebar-nav-item">
+                <a href="#" className="sidebar-nav-link">
+                  <span className="sidebar-nav-icon">📝</span>
+                  Vocabulary
+                </a>
+              </li>
+              <li className="sidebar-nav-item">
+                <a href="#" className="sidebar-nav-link">
+                  <span className="sidebar-nav-icon">🎯</span>
+                  Goals
+                </a>
+              </li>
+              <li className="sidebar-nav-item">
+                <a href="#" className="sidebar-nav-link">
+                  <span className="sidebar-nav-icon">📊</span>
+                  Resources
+                </a>
+              </li>
+            </ul>
+          </nav>
           
-          <div className="progress-categories">
-            <div className={`progress-category ${currentStep <= 4 ? 'active' : ''}`}>
-              <BookOpen size={16} />
-              <span>Basic Info</span>
+          {/* Goal Section - Like Wordela */}
+          <div style={{ marginTop: '2rem', padding: '1rem', background: '#f8fafc', borderRadius: '12px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+              <span>🎯</span>
+              <strong style={{ fontSize: '0.875rem', color: '#374151' }}>Goal</strong>
             </div>
-            <div className={`progress-category ${currentStep > 4 && currentStep <= 8 ? 'active' : ''}`}>
-              <Brain size={16} />
-              <span>Assessment</span>
-            </div>
-            <div className={`progress-category ${currentStep > 8 && currentStep <= 12 ? 'active' : ''}`}>
-              <Heart size={16} />
-              <span>Preferences</span>
-            </div>
-            <div className={`progress-category ${currentStep > 12 && currentStep <= 16 ? 'active' : ''}`}>
-              <Zap size={16} />
-              <span>Advanced</span>
-            </div>
-            <div className={`progress-category ${currentStep > 16 ? 'active' : ''}`}>
-              <Award size={16} />
-              <span>Completion</span>
-            </div>
+            <p style={{ margin: 0, fontSize: '0.75rem', color: '#6b7280' }}>
+              Learn at least 5 language skills
+            </p>
           </div>
         </div>
 
-        {/* AI Processing Indicator */}
-        {aiProcessing && (
-          <div className="ai-processing">
-            <div className="ai-processing-content">
-              <div className="ai-spinner"></div>
-              <div className="ai-processing-text">
-                <div className="ai-processing-title">AI Processing Your Profile</div>
-                <div className="ai-processing-subtitle">
-                  Analyzing learning patterns and generating personalized recommendations...
-                </div>
+        {/* Main Content Area */}
+        <div className="dashboard-main">
+          <div className="dashboard-header">
+            <div>
+              <h1 className="dashboard-title">Language Learning Dashboard</h1>
+              <p className="dashboard-subtitle">
+                Welcome to your personalized <strong>Language Learning dashboard</strong> - your all-in-one space to track progress, organize resources, and stay motivated while mastering English.
+              </p>
+            </div>
+            <div className="dashboard-actions">
+              <button className="btn-secondary" style={{ fontSize: '0.75rem', padding: '0.5rem 1rem' }}>
+                View Profile
+              </button>
+            </div>
+          </div>
+
+          {/* Progress Overview - Like Wordela Progress */}
+          <div className="progress-overview">
+            <div className="progress-card">
+              <div className="progress-icon" style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: 'white' }}>
+                🏆
               </div>
+              <div className="progress-value">{profile.profileCompleteness}%</div>
+              <div className="progress-label">Profile Complete</div>
+            </div>
+            <div className="progress-card">
+              <div className="progress-icon" style={{ background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', color: 'white' }}>
+                📚
+              </div>
+              <div className="progress-value">{currentStep}</div>
+              <div className="progress-label">Current Step</div>
+            </div>
+            <div className="progress-card">
+              <div className="progress-icon" style={{ background: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)', color: 'white' }}>
+                ⏱️
+              </div>
+              <div className="progress-value">{profile.availableTime || '30min'}</div>
+              <div className="progress-label">Daily Time</div>
+            </div>
+            <div className="progress-card">
+              <div className="progress-icon" style={{ background: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)', color: 'white' }}>
+                🎯
+              </div>
+              <div className="progress-value">{profile.primaryGoals?.length || 0}</div>
+              <div className="progress-label">Learning Goals</div>
             </div>
           </div>
-        )}
 
-        {/* Statistics Dashboard */}
-        <div className="stats-grid">
-          <div className="stat-card">
-            <div className="stat-icon">📊</div>
-            <div className="stat-value">{profile.profileCompleteness}%</div>
-            <div className="stat-label">Profile Complete</div>
+          {/* Quote Section */}
+          <div style={{ 
+            background: '#f8fafc', 
+            border: '1px solid #e5e7eb', 
+            borderLeft: '4px solid #667eea',
+            borderRadius: '8px',
+            padding: '1rem 1.5rem',
+            margin: '2rem 0',
+            fontStyle: 'italic',
+            color: '#6b7280'
+          }}>
+            "Small consistent steps lead to massive language breakthroughs."
           </div>
-          <div className="stat-card">
-            <div className="stat-icon">🎯</div>
-            <div className="stat-value">{profile.primaryGoals?.length || 0}</div>
-            <div className="stat-label">Learning Goals</div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-icon">⏱️</div>
-            <div className="stat-value">{profile.availableTime || 'TBD'}</div>
-            <div className="stat-label">Daily Time</div>
-          </div>
-          <div className="stat-card">
-            <div className="stat-icon">🏆</div>
-            <div className="stat-value">{profile.targetCertifications?.length || 0}</div>
-            <div className="stat-label">Target Certs</div>
-          </div>
-        </div>
 
-        {/* Main Content Card */}
-        <div className="professional-card">
+          {/* Main Onboarding Content */}
           <AnimatePresence mode="wait">
             <motion.div
               key={currentStep}
@@ -504,52 +503,93 @@ export const OnboardingFlow: React.FC = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="p-8"
             >
               {renderStep()}
             </motion.div>
           </AnimatePresence>
-        </div>
 
-        {/* Adaptive Recommendations Panel */}
-        {adaptiveRecommendations.length > 0 && (
-          <motion.div
-            className="professional-card mt-6"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            <div className="p-6">
-              <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                <Zap className="text-purple-600" size={24} />
-                AI Recommendations
+          {/* AI Processing Indicator */}
+          {aiProcessing && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              style={{
+                background: 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)',
+                borderRadius: '16px',
+                padding: '1.5rem',
+                color: 'white',
+                margin: '2rem 0',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '1rem'
+              }}
+            >
+              <div style={{
+                width: '24px',
+                height: '24px',
+                border: '2px solid rgba(255, 255, 255, 0.3)',
+                borderTop: '2px solid white',
+                borderRadius: '50%',
+                animation: 'spin 1s linear infinite'
+              }} />
+              <div>
+                <div style={{ fontWeight: '600', marginBottom: '0.25rem' }}>
+                  AI Processing Your Profile
+                </div>
+                <div style={{ fontSize: '0.875rem', opacity: 0.9 }}>
+                  Analyzing learning patterns and generating personalized recommendations...
+                </div>
+              </div>
+            </motion.div>
+          )}
+
+          {/* Adaptive Recommendations */}
+          {adaptiveRecommendations.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              style={{ marginTop: '2rem' }}
+            >
+              <h3 style={{ 
+                fontSize: '1.25rem', 
+                fontWeight: '700', 
+                color: '#1f2937', 
+                marginBottom: '1rem',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem'
+              }}>
+                🤖 AI Recommendations
               </h3>
-              <div className="course-grid">
+              <div className="language-grid">
                 {adaptiveRecommendations.map((rec, index) => (
-                  <div key={index} className="course-card">
-                    <div className="course-thumbnail">
+                  <div key={index} className="language-card">
+                    <div 
+                      className="language-image" 
+                      style={{ 
+                        background: `linear-gradient(135deg, ${
+                          index % 3 === 0 ? '#667eea, #764ba2' :
+                          index % 3 === 1 ? '#10b981, #059669' :
+                          '#f59e0b, #d97706'
+                        })`,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        fontSize: '2rem',
+                        color: 'white'
+                      }}
+                    >
                       🤖
                     </div>
-                    <div className="course-content">
-                      <div className="course-title">{rec}</div>
-                      <div className="course-description">
-                        Personalized recommendation based on your learning profile and preferences.
-                      </div>
-                      <div className="course-meta">
-                        <span>AI Generated</span>
-                        <div className="course-progress">
-                          <div className="course-progress-bar">
-                            <div className="course-progress-fill" style={{ width: '0%' }}></div>
-                          </div>
-                          <span>0%</span>
-                        </div>
-                      </div>
+                    <div className="language-info">
+                      <h4 className="language-name">{rec}</h4>
                     </div>
                   </div>
                 ))}
               </div>
-            </div>
-          </motion.div>
-        )}
+            </motion.div>
+          )}
+        </div>
       </div>
     </div>
   );
