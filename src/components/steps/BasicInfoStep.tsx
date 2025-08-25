@@ -88,7 +88,7 @@ export const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
   return (
     <div className="main-content">
       {/* Header */}
-      <div style={{ padding: '2rem', textAlign: 'center', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: 'white' }}>
+      <div className="section-header">
         <button 
           style={{ 
             position: 'absolute', 
@@ -107,7 +107,7 @@ export const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
         <div style={{ fontSize: '0.875rem', marginBottom: '0.5rem', opacity: 0.9 }}>
           Step {currentStep} of {totalSteps}
         </div>
-        <h1 style={{ fontSize: '2rem', fontWeight: '800', marginBottom: '0.5rem', margin: 0 }}>
+        <h1 style={{ fontSize: '1.75rem', fontWeight: '800', marginBottom: '0.5rem', margin: 0 }}>
           Tell us about yourself
         </h1>
         <p style={{ fontSize: '1rem', opacity: 0.9, margin: 0 }}>
@@ -117,7 +117,7 @@ export const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
 
       {/* Main Content */}
       <div style={{ flex: 1, padding: '2rem', maxWidth: '800px', margin: '0 auto', width: '100%' }}>
-        <button 
+        <button
           onClick={onNext}
           style={{ 
             position: 'absolute', 
@@ -134,7 +134,7 @@ export const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
         </button>
 
         {/* Character Illustration */}
-        <div style={{ textAlign: 'center', margin: '2rem 0' }}>
+        <div style={{ textAlign: 'center', margin: '1.5rem 0' }}>
           <div style={{ 
             position: 'relative', 
             width: '150px', 
@@ -147,13 +147,13 @@ export const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
             <div style={{
               width: '100px',
               height: '100px',
-              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              background: 'linear-gradient(135deg, #ff6b9d 0%, #4facfe 50%, #43e97b 100%)',
               borderRadius: '50%',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               fontSize: '3rem',
-              boxShadow: '0 16px 32px rgba(102, 126, 234, 0.3)',
+              boxShadow: '0 20px 60px rgba(255, 107, 157, 0.4)',
               position: 'relative',
               zIndex: 2
             }}>
@@ -164,14 +164,14 @@ export const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
                 position: 'absolute',
                 top: '10%',
                 right: '10%',
-                background: 'white',
+                background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
                 borderRadius: '50%',
                 width: '40px',
                 height: '40px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                boxShadow: '0 4px 16px rgba(0, 0, 0, 0.1)',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.15)',
                 fontSize: '1.25rem'
               }}
               animate={{ y: [-6, 6, -6] }}
@@ -184,14 +184,14 @@ export const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
                 position: 'absolute',
                 bottom: '20%',
                 left: '10%',
-                background: 'white',
+                background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
                 borderRadius: '50%',
                 width: '40px',
                 height: '40px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                boxShadow: '0 4px 16px rgba(0, 0, 0, 0.1)',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.15)',
                 fontSize: '1.25rem'
               }}
               animate={{ y: [6, -6, 6] }}
@@ -204,14 +204,14 @@ export const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
                 position: 'absolute',
                 top: '20%',
                 left: '15%',
-                background: 'white',
+                background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
                 borderRadius: '50%',
                 width: '40px',
                 height: '40px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                boxShadow: '0 4px 16px rgba(0, 0, 0, 0.1)',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.15)',
                 fontSize: '1.25rem'
               }}
               animate={{ y: [-4, 4, -4] }}
@@ -224,14 +224,14 @@ export const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
                 position: 'absolute',
                 bottom: '10%',
                 right: '15%',
-                background: 'white',
+                background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
                 borderRadius: '50%',
                 width: '40px',
                 height: '40px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                boxShadow: '0 4px 16px rgba(0, 0, 0, 0.1)',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.15)',
                 fontSize: '1.25rem'
               }}
               animate={{ y: [3, -3, 3] }}
@@ -241,6 +241,15 @@ export const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
             </motion.div>
           </div>
         </div>
+
+        {/* Add a colorful section divider */}
+        <div style={{
+          width: '60px',
+          height: '4px',
+          background: 'linear-gradient(135deg, #ff6b9d 0%, #4facfe 100%)',
+          borderRadius: '2px',
+          margin: '0 auto 2rem'
+        }} />
 
         {/* Basic Information Form */}
         <div className="form-section">

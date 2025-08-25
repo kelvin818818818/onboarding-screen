@@ -11,11 +11,11 @@ export const WelcomeStep: React.FC<WelcomeStepProps> = ({ onNext, currentStep, t
   return (
     <div className="main-content">
       {/* Header Section */}
-      <div style={{ padding: '2rem', textAlign: 'center', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: 'white' }}>
+      <div className="section-header">
         <div style={{ fontSize: '0.875rem', marginBottom: '0.5rem', opacity: 0.9 }}>
           Welcome to
         </div>
-        <h1 style={{ fontSize: '2.5rem', fontWeight: '800', marginBottom: '0.5rem', margin: 0 }}>
+        <h1 style={{ fontSize: '2rem', fontWeight: '800', marginBottom: '0.5rem', margin: 0 }}>
           Speaker
         </h1>
         <p style={{ fontSize: '1rem', opacity: 0.9, margin: 0 }}>
@@ -54,13 +54,13 @@ export const WelcomeStep: React.FC<WelcomeStepProps> = ({ onNext, currentStep, t
             <div style={{
               width: '150px',
               height: '150px',
-              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              background: 'linear-gradient(135deg, #ff6b9d 0%, #4facfe 50%, #43e97b 100%)',
               borderRadius: '50%',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               fontSize: '4rem',
-              boxShadow: '0 20px 40px rgba(102, 126, 234, 0.3)',
+              boxShadow: '0 20px 60px rgba(255, 107, 157, 0.4)',
               position: 'relative',
               zIndex: 2
             }}>
@@ -71,14 +71,14 @@ export const WelcomeStep: React.FC<WelcomeStepProps> = ({ onNext, currentStep, t
                 position: 'absolute',
                 top: '10%',
                 right: '10%',
-                background: 'white',
+                background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
                 borderRadius: '50%',
                 width: '50px',
                 height: '50px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                boxShadow: '0 8px 24px rgba(0, 0, 0, 0.1)',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.15)',
                 fontSize: '1.5rem'
               }}
               animate={{ y: [-8, 8, -8] }}
@@ -91,14 +91,14 @@ export const WelcomeStep: React.FC<WelcomeStepProps> = ({ onNext, currentStep, t
                 position: 'absolute',
                 bottom: '20%',
                 left: '10%',
-                background: 'white',
+                background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
                 borderRadius: '50%',
                 width: '50px',
                 height: '50px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                boxShadow: '0 8px 24px rgba(0, 0, 0, 0.1)',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.15)',
                 fontSize: '1.5rem'
               }}
               animate={{ y: [8, -8, 8] }}
@@ -111,14 +111,14 @@ export const WelcomeStep: React.FC<WelcomeStepProps> = ({ onNext, currentStep, t
                 position: 'absolute',
                 top: '20%',
                 left: '15%',
-                background: 'white',
+                background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
                 borderRadius: '50%',
                 width: '50px',
                 height: '50px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                boxShadow: '0 8px 24px rgba(0, 0, 0, 0.1)',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.15)',
                 fontSize: '1.5rem'
               }}
               animate={{ y: [-6, 6, -6] }}
@@ -131,14 +131,14 @@ export const WelcomeStep: React.FC<WelcomeStepProps> = ({ onNext, currentStep, t
                 position: 'absolute',
                 bottom: '10%',
                 right: '15%',
-                background: 'white',
+                background: 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
                 borderRadius: '50%',
                 width: '50px',
                 height: '50px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                boxShadow: '0 8px 24px rgba(0, 0, 0, 0.1)',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.15)',
                 fontSize: '1.5rem'
               }}
               animate={{ y: [4, -4, 4] }}
@@ -165,7 +165,7 @@ export const WelcomeStep: React.FC<WelcomeStepProps> = ({ onNext, currentStep, t
               <div style={{ 
                 width: '80px', 
                 height: '80px', 
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', 
+                background: 'linear-gradient(135deg, #ff6b9d 0%, #4facfe 100%)', 
                 borderRadius: '50%', 
                 display: 'flex', 
                 alignItems: 'center', 
@@ -173,7 +173,7 @@ export const WelcomeStep: React.FC<WelcomeStepProps> = ({ onNext, currentStep, t
                 margin: '0 auto 1rem',
                 color: 'white',
                 fontSize: '2rem',
-                boxShadow: '0 8px 24px rgba(102, 126, 234, 0.3)'
+                boxShadow: '0 8px 32px rgba(255, 107, 157, 0.3)'
               }}>
                 🎯
               </div>
@@ -185,7 +185,7 @@ export const WelcomeStep: React.FC<WelcomeStepProps> = ({ onNext, currentStep, t
               <div style={{ 
                 width: '80px', 
                 height: '80px', 
-                background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', 
+                background: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)', 
                 borderRadius: '50%', 
                 display: 'flex', 
                 alignItems: 'center', 
@@ -193,7 +193,7 @@ export const WelcomeStep: React.FC<WelcomeStepProps> = ({ onNext, currentStep, t
                 margin: '0 auto 1rem',
                 color: 'white',
                 fontSize: '2rem',
-                boxShadow: '0 8px 24px rgba(16, 185, 129, 0.3)'
+                boxShadow: '0 8px 32px rgba(67, 233, 123, 0.3)'
               }}>
                 📊
               </div>
@@ -225,7 +225,7 @@ export const WelcomeStep: React.FC<WelcomeStepProps> = ({ onNext, currentStep, t
               <div style={{ 
                 width: '80px', 
                 height: '80px', 
-                background: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)', 
+                background: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)', 
                 borderRadius: '50%', 
                 display: 'flex', 
                 alignItems: 'center', 
@@ -233,7 +233,7 @@ export const WelcomeStep: React.FC<WelcomeStepProps> = ({ onNext, currentStep, t
                 margin: '0 auto 1rem',
                 color: 'white',
                 fontSize: '2rem',
-                boxShadow: '0 8px 24px rgba(239, 68, 68, 0.3)'
+                boxShadow: '0 8px 32px rgba(240, 147, 251, 0.3)'
               }}>
                 🤖
               </div>
@@ -249,7 +249,7 @@ export const WelcomeStep: React.FC<WelcomeStepProps> = ({ onNext, currentStep, t
           <button
             onClick={onNext}
             style={{
-              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              background: 'linear-gradient(135deg, #ff6b9d 0%, #4facfe 100%)',
               color: 'white',
               border: 'none',
               borderRadius: '12px',
@@ -257,24 +257,24 @@ export const WelcomeStep: React.FC<WelcomeStepProps> = ({ onNext, currentStep, t
               fontSize: '1.125rem',
               fontWeight: '600',
               cursor: 'pointer',
-              boxShadow: '0 8px 24px rgba(102, 126, 234, 0.3)',
+              boxShadow: '0 8px 32px rgba(255, 107, 157, 0.3)',
               marginBottom: '2rem',
               transition: 'all 0.3s ease'
             }}
             onMouseOver={(e) => {
-              e.currentTarget.style.transform = 'translateY(-2px)';
-              e.currentTarget.style.boxShadow = '0 12px 32px rgba(102, 126, 234, 0.4)';
+              e.currentTarget.style.transform = 'translateY(-4px) scale(1.02)';
+              e.currentTarget.style.boxShadow = '0 16px 48px rgba(255, 107, 157, 0.4)';
             }}
             onMouseOut={(e) => {
               e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = '0 8px 24px rgba(102, 126, 234, 0.3)';
+              e.currentTarget.style.boxShadow = '0 8px 32px rgba(255, 107, 157, 0.3)';
             }}
           >
             Start Learning
           </button>
           
           <p style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '2rem' }}>
-            Already have an account? <span style={{ color: '#667eea', fontWeight: '500', cursor: 'pointer' }}>Log in</span>
+            Already have an account? <span style={{ color: '#ff6b9d', fontWeight: '500', cursor: 'pointer' }}>Log in</span>
           </p>
           
           {/* Progress Dots */}
@@ -286,7 +286,7 @@ export const WelcomeStep: React.FC<WelcomeStepProps> = ({ onNext, currentStep, t
                   width: '8px',
                   height: '8px',
                   borderRadius: '50%',
-                  background: index + 1 === currentStep ? '#667eea' : index < currentStep ? '#10b981' : '#d1d5db',
+                  background: index + 1 === currentStep ? '#ff6b9d' : index < currentStep ? '#43e97b' : 'rgba(255, 107, 157, 0.2)',
                   transform: index + 1 === currentStep ? 'scale(1.5)' : 'scale(1)',
                   transition: 'all 0.3s ease'
                 }}
