@@ -529,18 +529,19 @@ body {
 }
 
 .option-card.selected {
-  background: linear-gradient(135deg, #ff6b9d 0%, #4facfe 100%) !important;
-  border: 3px solid #ff6b9d !important;
+  background: linear-gradient(135deg, #10b981 0%, #22c55e 100%) !important;
+  border: 3px solid #10b981 !important;
   color: white !important;
-  box-shadow: 0 20px 60px rgba(255, 107, 157, 0.4) !important;
-  transform: translateY(-8px) scale(1.05) !important;
+  box-shadow: 0 20px 60px rgba(16, 185, 129, 0.4) !important;
+  transform: translateY(-4px) scale(1.02) !important;
   position: relative !important;
+  z-index: 5 !important;
 }
 
 .option-card.selected::before {
-  transform: scaleX(1);
-  height: 100%;
-  background: rgba(255, 255, 255, 0.1);
+  transform: scaleX(1) !important;
+  height: 100% !important;
+  background: rgba(255, 255, 255, 0.1) !important;
 }
 
 .option-card.selected::after {
@@ -563,26 +564,33 @@ body {
   animation: checkmarkPop 0.3s ease-out !important;
 }
 
+/* Ensure selected state overrides all other states */
+.option-btn.selected,
+.option-btn.selected:hover,
+.option-btn.selected:focus,
+.option-btn.selected:active {
+  background: linear-gradient(135deg, #10b981 0%, #22c55e 100%) !important;
+  border: 3px solid #10b981 !important;
+  color: white !important;
+  box-shadow: 0 20px 60px rgba(16, 185, 129, 0.4) !important;
+  transform: translateY(-4px) scale(1.02) !important;
+}
+
+/* Make sure all text inside selected buttons stays white */
+.option-btn.selected *,
+.option-btn.selected:hover *,
+.option-btn.selected:focus *,
+.option-btn.selected:active * {
+  color: white !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
 @keyframes checkmarkPop {
   0% { transform: scale(0) rotate(0deg); }
   50% { transform: scale(1.2) rotate(180deg); }
   100% { transform: scale(1) rotate(360deg); }
 }
 
-/* Make selected text more visible */
-.option-btn.selected .option-title,
-.option-btn.selected .option-description,
-.option-btn.selected span {
-  color: white !important;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
-}
-
-/* Ensure selected state overrides hover */
-.option-btn.selected:hover {
-  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
-  border-color: #1d4ed8 !important;
-  transform: translateY(-4px) !important;
-}
 
 /* Skip Button Styles */
 .skip-button {
