@@ -164,10 +164,10 @@ export const InterestsStep: React.FC<InterestsStepProps> = ({
               <motion.button
                 key={topic}
                 onClick={() => toggleTopic(topic)}
-                className={`p-3 rounded-lg text-sm font-medium transition-all duration-200 ${
+                className={`small-option-btn ${
                   profile.topics?.includes(topic)
-                    ? 'bg-primary-500 text-white shadow-lg ring-2 ring-primary-400/50'
-                    : 'glass text-white/80 hover:bg-white/10 border border-white/20'
+                    ? 'selected'
+                    : ''
                 }`}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}

@@ -238,10 +238,10 @@ export const TimeCommitmentStep: React.FC<TimeCommitmentStepProps> = ({
               <motion.button
                 key={reminder.id}
                 onClick={() => toggleReminder(reminder.id)}
-                className={`p-4 rounded-xl text-center transition-all duration-300 border-2 ${
+                className={`small-option-btn text-center ${
                   profile.reminderPreferences?.includes(reminder.id)
-                    ? 'border-primary-400 bg-primary-500/20 shadow-xl ring-4 ring-primary-400/30'
-                    : 'glass border-white/20 hover:border-white/40 hover:bg-white/10'
+                    ? 'selected'
+                    : ''
                 }`}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
