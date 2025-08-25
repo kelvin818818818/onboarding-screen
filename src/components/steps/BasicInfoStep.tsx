@@ -86,52 +86,146 @@ export const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
   };
 
   return (
-    <div className="phone-mockup">
-      <div className="phone-screen">
-        {/* Status Bar */}
-        <div className="status-bar">
-          <div className="status-time">9:41</div>
-          <div className="status-indicators">
-            <span>📶</span>
-            <span>📶</span>
-            <span>🔋</span>
+    <div className="main-content">
+      {/* Header */}
+      <div style={{ padding: '2rem', textAlign: 'center', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: 'white' }}>
+        <button 
+          style={{ 
+            position: 'absolute', 
+            top: '1rem', 
+            right: '1rem', 
+            background: 'none', 
+            border: 'none', 
+            color: 'rgba(255,255,255,0.8)', 
+            fontSize: '0.875rem', 
+            cursor: 'pointer' 
+          }}
+        >
+          Skip
+        </button>
+        
+        <div style={{ fontSize: '0.875rem', marginBottom: '0.5rem', opacity: 0.9 }}>
+          Step {currentStep} of {totalSteps}
+        </div>
+        <h1 style={{ fontSize: '2rem', fontWeight: '800', marginBottom: '0.5rem', margin: 0 }}>
+          Tell us about yourself
+        </h1>
+        <p style={{ fontSize: '1rem', opacity: 0.9, margin: 0 }}>
+          Help us personalize your learning experience
+        </p>
+      </div>
+
+      {/* Main Content */}
+      <div style={{ flex: 1, padding: '2rem', maxWidth: '800px', margin: '0 auto', width: '100%' }}>
+        {/* Character Illustration */}
+        <div style={{ textAlign: 'center', margin: '2rem 0' }}>
+          <div style={{ 
+            position: 'relative', 
+            width: '150px', 
+            height: '150px', 
+            margin: '0 auto',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            <div style={{
+              width: '100px',
+              height: '100px',
+              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '3rem',
+              boxShadow: '0 16px 32px rgba(102, 126, 234, 0.3)',
+              position: 'relative',
+              zIndex: 2
+            }}>
+              👋
+            </div>
+            <motion.div
+              style={{
+                position: 'absolute',
+                top: '10%',
+                right: '10%',
+                background: 'white',
+                borderRadius: '50%',
+                width: '40px',
+                height: '40px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: '0 4px 16px rgba(0, 0, 0, 0.1)',
+                fontSize: '1.25rem'
+              }}
+              animate={{ y: [-6, 6, -6] }}
+              transition={{ duration: 2.5, repeat: Infinity }}
+            >
+              ✨
+            </motion.div>
+            <motion.div
+              style={{
+                position: 'absolute',
+                bottom: '20%',
+                left: '10%',
+                background: 'white',
+                borderRadius: '50%',
+                width: '40px',
+                height: '40px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: '0 4px 16px rgba(0, 0, 0, 0.1)',
+                fontSize: '1.25rem'
+              }}
+              animate={{ y: [6, -6, 6] }}
+              transition={{ duration: 2.8, repeat: Infinity }}
+            >
+              📝
+            </motion.div>
+            <motion.div
+              style={{
+                position: 'absolute',
+                top: '20%',
+                left: '15%',
+                background: 'white',
+                borderRadius: '50%',
+                width: '40px',
+                height: '40px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: '0 4px 16px rgba(0, 0, 0, 0.1)',
+                fontSize: '1.25rem'
+              }}
+              animate={{ y: [-4, 4, -4] }}
+              transition={{ duration: 3.2, repeat: Infinity }}
+            >
+              🎯
+            </motion.div>
+            <motion.div
+              style={{
+                position: 'absolute',
+                bottom: '10%',
+                right: '15%',
+                background: 'white',
+                borderRadius: '50%',
+                width: '40px',
+                height: '40px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: '0 4px 16px rgba(0, 0, 0, 0.1)',
+                fontSize: '1.25rem'
+              }}
+              animate={{ y: [3, -3, 3] }}
+              transition={{ duration: 2.2, repeat: Infinity }}
+            >
+              💡
+            </motion.div>
           </div>
         </div>
 
-        <div className="card-content">
-          <button className="skip-btn">Skip</button>
-          
-          {/* Header with Character */}
-          <div className="card-header">
-            <div className="character-container" style={{ width: '120px', height: '120px', margin: '1rem auto' }}>
-              <div className="character-main" style={{ width: '80px', height: '80px', fontSize: '2.5rem' }}>
-                👋
-              </div>
-              <div className="floating-element">✨</div>
-              <div className="floating-element">📝</div>
-              <div className="floating-element">🎯</div>
-              <div className="floating-element">💡</div>
-            </div>
-            <h2 className="card-title">Tell us about yourself</h2>
-            <p className="card-subtitle">Help us personalize your learning experience</p>
-          </div>
-
-          {/* Form Content */}
-          <div style={{ flex: 1, overflowY: 'auto' }}>
-            {/* Personal Information */}
-            <div className="form-section">
-              <label className="form-label">Full Name *</label>
-              <input
-                type="text"
-                value={profile.name}
-                onChange={(e) => onUpdate({ name: e.target.value })}
-                placeholder="Enter your full name"
-                className={`form-input ${errors.name ? 'error' : ''}`}
-              />
-              {errors.name && (
-                <p className="form-error">{errors.name}</p>
-              )}
-            </div>
             
             <div className="form-section">
               <label className="form-label">Email Address *</label>
