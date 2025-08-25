@@ -412,30 +412,46 @@ body {
 }
 
 .option-card.selected {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
-  border-color: #10b981 !important;
-  color: white;
-  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4) !important;
-  transform: translateY(-2px);
-  border-width: 3px;
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
+  border: 3px solid #1d4ed8 !important;
+  color: white !important;
+  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.5) !important;
+  transform: translateY(-4px) !important;
+  position: relative !important;
 }
 
 .option-card.selected::after {
-  content: '✓';
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background: #ffffff;
-  color: #10b981;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  font-weight: bold;
-  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+  content: '✓' !important;
+  position: absolute !important;
+  top: 4px !important;
+  right: 4px !important;
+  background: #10b981 !important;
+  color: white !important;
+  border-radius: 50% !important;
+  width: 20px !important;
+  height: 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+  z-index: 10 !important;
+}
+
+/* Make selected text more visible */
+.option-btn.selected .option-title,
+.option-btn.selected .option-description,
+.option-btn.selected span {
+  color: white !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Ensure selected state overrides hover */
+.option-btn.selected:hover {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
+  border-color: #1d4ed8 !important;
+  transform: translateY(-4px) !important;
 }
 
 /* Skip Button Styles */
