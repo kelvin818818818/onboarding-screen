@@ -190,9 +190,15 @@ export const AssessmentStep: React.FC<AssessmentStepProps> = ({
     onNext();
   };
 
+  const canContinue = () => {
+    // Allow continue if diagnostic questions are completed OR if assessment preferences are selected
+    const diagnosticCompleted = Object.keys(answers).length === diagnosticQuestions.length;
+    const preferencesSelected = profile.assessmentPreferences?.length > 0;
+    return diagnosticCompleted || preferencesSelected;
+  };
   return (
     <div className="card-content">
-      <button className="skip-btn" onClick={onNext}>Skip</button>
+      <button className="skip-button" onClick={onNext}>Skip</button>
 
       <div>
         <motion.div
@@ -424,7 +430,7 @@ export const AssessmentStep: React.FC<AssessmentStepProps> = ({
           <button 
             className="primary-btn" 
             onClick={handleNext}
-            disabled={currentQuestion < diagnosticQuestions.length || !profile.assessmentPreferences?.length}
+            disabled={!canContinue()}
             style={{ flex: 1, marginBottom: 0 }}
           >
             CONTINUE

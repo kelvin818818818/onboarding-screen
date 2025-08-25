@@ -37,7 +37,7 @@ export const SocialLearningStep: React.FC<SocialLearningStepProps> = ({
     <div className="phone-mockup">
       <div className="phone-screen">
         <div className="onboarding-header">
-          <button className="skip-btn">Skip</button>
+          <button className="skip-button" onClick={onNext}>Skip</button>
         </div>
         
         <motion.div 

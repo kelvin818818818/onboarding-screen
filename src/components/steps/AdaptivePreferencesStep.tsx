@@ -123,7 +123,7 @@ export const AdaptivePreferencesStep: React.FC<AdaptivePreferencesStepProps> = (
 
   return (
     <div className="card-content">
-      <button className="skip-btn" onClick={onNext}>Skip</button>
+      <button className="skip-button" onClick={onNext}>Skip</button>
 
       <div>
         <motion.div

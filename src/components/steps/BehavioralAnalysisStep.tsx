@@ -117,7 +117,7 @@ export const BehavioralAnalysisStep: React.FC<BehavioralAnalysisStepProps> = ({
 
   return (
     <div className="card-content">
-      <button className="skip-btn" onClick={onNext}>Skip</button>
+      <button className="skip-button" onClick={onNext}>Skip</button>
 
       <div>
         <motion.div
