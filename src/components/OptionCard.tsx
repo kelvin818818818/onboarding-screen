@@ -64,7 +64,7 @@ export const OptionCard: React.FC<OptionCardProps> = ({
           <Icon size={variant === 'large' ? 32 : variant === 'compact' ? 20 : 24} />
         </motion.div>
         
-        <div>
+        <div className="flex items-center gap-3">
           <h3 className={clsx(
             'font-semibold text-white mb-1',
             {
@@ -75,6 +75,27 @@ export const OptionCard: React.FC<OptionCardProps> = ({
           )}>
             {title}
           </h3>
+          {isSelected && (
+            <motion.div
+              className="bg-success-500 text-white rounded-full shadow-lg flex-shrink-0"
+              style={{ 
+                width: '24px', 
+                height: '24px', 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center'
+              }}
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ type: "spring", stiffness: 500, damping: 30 }}
+            >
+              <svg style={{ width: '14px', height: '14px' }} fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+              </svg>
+            </motion.div>
+          )}
+        </div>
+        <div>
           <p className={clsx(
             'text-white/70 leading-relaxed',
             {
@@ -88,26 +109,6 @@ export const OptionCard: React.FC<OptionCardProps> = ({
         </div>
       </div>
       
-      {isSelected && (
-        <motion.div
-          className="absolute -top-1 -right-1 bg-primary-400 text-white rounded-full shadow-lg"
-          style={{ 
-            width: '28px', 
-            height: '28px', 
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'center',
-            fontSize: '14px'
-          }}
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ type: "spring", stiffness: 500, damping: 30 }}
-        >
-          <svg style={{ width: '16px', height: '16px' }} fill="currentColor" viewBox="0 0 20 20">
-            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-          </svg>
-        </motion.div>
-      )}
     </motion.div>
   );
 };
