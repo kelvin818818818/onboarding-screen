@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { UserProfile } from '../types/onboarding';
+import { Search, Bell, Settings, User, BookOpen, Target, Clock, Heart, Brain, Users, Award, Zap, BarChart3 } from 'lucide-react';
 import { WelcomeStep } from './steps/WelcomeStep';
 import { BasicInfoStep } from './steps/BasicInfoStep';
 import { LanguageBackgroundStep } from './steps/LanguageBackgroundStep';
@@ -372,90 +373,130 @@ export const OnboardingFlow: React.FC = () => {
 
   return (
     <div className="learning-platform">
-      {/* Advanced Dashboard Container */}
-      <div className="dashboard-container">
-        {/* Top Navigation Bar */}
-        <div className="dashboard-nav">
-          <div className="nav-brand">🎓 EnglishMaster Pro</div>
-          <div className="nav-menu">
-            <a href="#" className="nav-item active">Onboarding</a>
-            <a href="#" className="nav-item">Courses</a>
-            <a href="#" className="nav-item">Progress</a>
-            <a href="#" className="nav-item">Community</a>
+      {/* Professional Navigation Bar */}
+      <div className="professional-nav">
+        <div className="nav-brand">
+          <div className="nav-brand-icon">
+            🎓
           </div>
-          <div className="flex items-center gap-4">
-            <div className="text-white text-sm">
-              Profile: {profile.profileCompleteness}% Complete
+          EnglishMaster Pro
+        </div>
+        
+        <div className="nav-menu">
+          <a href="#" className="nav-item active">
+            <BookOpen size={16} />
+            Onboarding
+          </a>
+          <a href="#" className="nav-item">
+            <Target size={16} />
+            Courses
+          </a>
+          <a href="#" className="nav-item">
+            <BarChart3 size={16} />
+            Progress
+          </a>
+          <a href="#" className="nav-item">
+            <Users size={16} />
+            Community
+          </a>
+        </div>
+        
+        <div className="nav-profile">
+          <div className="profile-info">
+            <div className="profile-name">{profile.name || 'New Learner'}</div>
+            <div className="profile-level">
+              {profile.currentLevel?.charAt(0).toUpperCase() + profile.currentLevel?.slice(1)} Level
             </div>
-            <div className="w-32 h-2 bg-white/20 rounded-full overflow-hidden">
-              <motion.div
-                className="h-full bg-gradient-to-r from-green-400 to-blue-500 rounded-full"
-                initial={{ width: 0 }}
-                animate={{ width: `${profile.profileCompleteness}%` }}
-                transition={{ duration: 0.5 }}
-              />
-            </div>
+          </div>
+          <div className="profile-avatar">
+            {profile.name ? profile.name.charAt(0).toUpperCase() : 'U'}
           </div>
         </div>
+      </div>
 
-        {/* Advanced Progress Tracking */}
-        <div className="learning-card mb-8">
-          <div className="p-6">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-2xl font-bold text-gray-800">Learning Journey Setup</h2>
-              <div className="text-sm text-gray-600">
-                Step {currentStep} of {TOTAL_STEPS}
-              </div>
+      {/* Dashboard Container */}
+      <div className="dashboard-container">
+        {/* Professional Progress Section */}
+        <div className="progress-section">
+          <div className="progress-header">
+            <div className="progress-title">Learning Journey Setup</div>
+            <div className="progress-percentage">{Math.round((currentStep / TOTAL_STEPS) * 100)}%</div>
+          </div>
+          
+          <div className="progress-bar">
+            <motion.div
+              className="progress-fill"
+              initial={{ width: 0 }}
+              animate={{ width: `${(currentStep / TOTAL_STEPS) * 100}%` }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+            />
+          </div>
+          
+          <div className="progress-categories">
+            <div className={`progress-category ${currentStep <= 4 ? 'active' : ''}`}>
+              <BookOpen size={16} />
+              <span>Basic Info</span>
             </div>
-            
-            {/* Complex Progress Visualization */}
-            <div className="progress-container">
-              <div className="flex justify-between text-sm text-white/80 mb-2">
-                <span>Progress</span>
-                <span>{Math.round((currentStep / TOTAL_STEPS) * 100)}%</span>
-              </div>
-              <div className="progress-bar">
-                <motion.div
-                  className="progress-fill"
-                  initial={{ width: 0 }}
-                  animate={{ width: `${(currentStep / TOTAL_STEPS) * 100}%` }}
-                  transition={{ duration: 0.5 }}
-                />
-              </div>
-              
-              {/* Step Categories */}
-              <div className="flex justify-between mt-4 text-xs text-white/60">
-                <span className={currentStep <= 4 ? 'text-white font-semibold' : ''}>Basic Info</span>
-                <span className={currentStep > 4 && currentStep <= 8 ? 'text-white font-semibold' : ''}>Assessment</span>
-                <span className={currentStep > 8 && currentStep <= 12 ? 'text-white font-semibold' : ''}>Preferences</span>
-                <span className={currentStep > 12 && currentStep <= 16 ? 'text-white font-semibold' : ''}>Advanced</span>
-                <span className={currentStep > 16 ? 'text-white font-semibold' : ''}>Completion</span>
-              </div>
+            <div className={`progress-category ${currentStep > 4 && currentStep <= 8 ? 'active' : ''}`}>
+              <Brain size={16} />
+              <span>Assessment</span>
+            </div>
+            <div className={`progress-category ${currentStep > 8 && currentStep <= 12 ? 'active' : ''}`}>
+              <Heart size={16} />
+              <span>Preferences</span>
+            </div>
+            <div className={`progress-category ${currentStep > 12 && currentStep <= 16 ? 'active' : ''}`}>
+              <Zap size={16} />
+              <span>Advanced</span>
+            </div>
+            <div className={`progress-category ${currentStep > 16 ? 'active' : ''}`}>
+              <Award size={16} />
+              <span>Completion</span>
             </div>
           </div>
         </div>
 
         {/* AI Processing Indicator */}
         {aiProcessing && (
-          <motion.div
-            className="learning-card mb-6"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            <div className="p-4 bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-lg">
-              <div className="flex items-center gap-3">
-                <div className="animate-spin rounded-full h-6 w-6 border-2 border-white border-t-transparent"></div>
-                <div>
-                  <div className="font-semibold">AI Processing Your Profile</div>
-                  <div className="text-sm opacity-90">Analyzing learning patterns and generating personalized recommendations...</div>
+          <div className="ai-processing">
+            <div className="ai-processing-content">
+              <div className="ai-spinner"></div>
+              <div className="ai-processing-text">
+                <div className="ai-processing-title">AI Processing Your Profile</div>
+                <div className="ai-processing-subtitle">
+                  Analyzing learning patterns and generating personalized recommendations...
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         )}
 
-        {/* Main Content Area */}
-        <div className="learning-card">
+        {/* Statistics Dashboard */}
+        <div className="stats-grid">
+          <div className="stat-card">
+            <div className="stat-icon">📊</div>
+            <div className="stat-value">{profile.profileCompleteness}%</div>
+            <div className="stat-label">Profile Complete</div>
+          </div>
+          <div className="stat-card">
+            <div className="stat-icon">🎯</div>
+            <div className="stat-value">{profile.primaryGoals?.length || 0}</div>
+            <div className="stat-label">Learning Goals</div>
+          </div>
+          <div className="stat-card">
+            <div className="stat-icon">⏱️</div>
+            <div className="stat-value">{profile.availableTime || 'TBD'}</div>
+            <div className="stat-label">Daily Time</div>
+          </div>
+          <div className="stat-card">
+            <div className="stat-icon">🏆</div>
+            <div className="stat-value">{profile.targetCertifications?.length || 0}</div>
+            <div className="stat-label">Target Certs</div>
+          </div>
+        </div>
+
+        {/* Main Content Card */}
+        <div className="professional-card">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentStep}
@@ -470,69 +511,39 @@ export const OnboardingFlow: React.FC = () => {
           </AnimatePresence>
         </div>
 
-        {/* Advanced Navigation Controls */}
-        <div className="flex justify-between items-center mt-8">
-          <div className="flex items-center gap-4">
-            {currentStep > 1 && (
-              <motion.button
-                className="btn-secondary"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={prevStep}
-              >
-                ← Previous
-              </motion.button>
-            )}
-          </div>
-
-          <div className="flex items-center gap-2">
-            {Array.from({ length: Math.min(10, TOTAL_STEPS) }, (_, index) => {
-              const stepIndex = Math.max(0, currentStep - 5) + index;
-              return (
-                <div
-                  key={stepIndex}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    stepIndex + 1 === currentStep
-                      ? 'bg-blue-400 w-8'
-                      : stepIndex + 1 < currentStep
-                      ? 'bg-green-400'
-                      : 'bg-white/30'
-                  }`}
-                />
-              );
-            })}
-          </div>
-
-          <div className="flex items-center gap-4">
-            {currentStep < TOTAL_STEPS && (
-              <motion.button
-                className="btn-primary"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={nextStep}
-              >
-                Continue →
-              </motion.button>
-            )}
-          </div>
-        </div>
-
         {/* Adaptive Recommendations Panel */}
         {adaptiveRecommendations.length > 0 && (
           <motion.div
-            className="learning-card mt-8"
-            initial={{ opacity: 0, y: 20 }}
+            className="professional-card mt-6"
+            initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
           >
             <div className="p-6">
               <h3 className="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
-                🤖 AI Recommendations
+                <Zap className="text-purple-600" size={24} />
+                AI Recommendations
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="course-grid">
                 {adaptiveRecommendations.map((rec, index) => (
-                  <div key={index} className="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-lg border border-blue-200">
-                    <div className="font-semibold text-gray-800 mb-1">{rec}</div>
-                    <div className="text-sm text-gray-600">Personalized based on your profile</div>
+                  <div key={index} className="course-card">
+                    <div className="course-thumbnail">
+                      🤖
+                    </div>
+                    <div className="course-content">
+                      <div className="course-title">{rec}</div>
+                      <div className="course-description">
+                        Personalized recommendation based on your learning profile and preferences.
+                      </div>
+                      <div className="course-meta">
+                        <span>AI Generated</span>
+                        <div className="course-progress">
+                          <div className="course-progress-bar">
+                            <div className="course-progress-fill" style={{ width: '0%' }}></div>
+                          </div>
+                          <span>0%</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>

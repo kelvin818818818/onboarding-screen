@@ -86,75 +86,176 @@ export const BasicInfoStep: React.FC<BasicInfoStepProps> = ({
   };
 
   return (
-    <div className="max-w-4xl mx-auto">
-      {/* Header */}
-      <motion.div
-        className="text-center mb-8"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <div className="w-20 h-20 mx-auto bg-gradient-to-br from-blue-400 to-purple-500 rounded-2xl flex items-center justify-center mb-6 shadow-xl">
-          <span className="text-3xl">👋</span>
+    <div className="phone-mockup">
+      <div className="phone-screen">
+        {/* Header */}
+        <div className="p-6 border-b border-gray-100">
+          <button className="text-blue-600 text-sm float-right">Skip</button>
+          <div className="text-center">
+            <div className="character-container mb-4" style={{ width: '120px', height: '120px', margin: '0 auto' }}>
+              <div className="character-main" style={{ width: '80px', height: '80px', fontSize: '2.5rem' }}>
+                👋
+              </div>
+              <div className="floating-element">✨</div>
+              <div className="floating-element">📝</div>
+            </div>
+            <h2 className="text-xl font-bold text-gray-800 mb-1">Tell us about yourself</h2>
+            <p className="text-gray-600 text-sm">Help us personalize your experience</p>
+          </div>
         </div>
-        <h2 className="text-3xl font-bold text-gray-800 mb-2">Tell us about yourself</h2>
-        <p className="text-gray-600">This helps us create your personalized learning experience</p>
-      </motion.div>
 
-      {/* Form Sections */}
-      <div className="space-y-8">
-        {/* Personal Information */}
-        <motion.div
-          className="form-section"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <h3>Personal Information</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Content */}
+        <div className="flex-1 p-6 overflow-y-auto">
+          {/* Personal Information */}
+          <div className="space-y-4 mb-6">
             <div>
-              <label className="block text-white font-medium mb-2">Full Name *</label>
+              <label className="block text-gray-700 font-medium mb-2 text-sm">Full Name *</label>
               <input
                 type="text"
                 value={profile.name}
                 onChange={(e) => onUpdate({ name: e.target.value })}
                 placeholder="Enter your full name"
-                className={`w-full px-4 py-3 rounded-xl bg-white/10 text-white placeholder-white/50 border-2 ${
-                  errors.name ? 'border-red-400' : 'border-white/20'
-                } transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-blue-400/30 focus:border-blue-400`}
+                className={`form-input ${errors.name ? 'error' : ''}`}
               />
               {errors.name && (
-                <p className="text-red-300 text-sm mt-1">{errors.name}</p>
+                <p className="form-error">{errors.name}</p>
               )}
             </div>
             
             <div>
-              <label className="block text-white font-medium mb-2">Email Address *</label>
+              <label className="block text-gray-700 font-medium mb-2 text-sm">Email Address *</label>
               <input
                 type="email"
                 value={profile.email}
                 onChange={(e) => onUpdate({ email: e.target.value })}
                 placeholder="Enter your email"
-                className={`w-full px-4 py-3 rounded-xl bg-white/10 text-white placeholder-white/50 border-2 ${
-                  errors.email ? 'border-red-400' : 'border-white/20'
-                } transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-blue-400/30 focus:border-blue-400`}
+                className={`form-input ${errors.email ? 'error' : ''}`}
               />
               {errors.email && (
-                <p className="text-red-300 text-sm mt-1">{errors.email}</p>
+                <p className="form-error">{errors.email}</p>
               )}
             </div>
           </div>
-        </motion.div>
 
-        {/* Age Range */}
-        <motion.div
-          className="form-section"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-        >
-          <h3>Age Range *</h3>
-          <div className="option-grid">
+          {/* Age Range */}
+          <div className="mb-6">
+            <h3 className="text-gray-700 font-medium mb-3 text-sm">Age Range *</h3>
+            <div className="grid grid-cols-2 gap-2">
+              {ageRanges.slice(0, 6).map((age) => (
+                <div
+                  key={age.value}
+                  onClick={() => onUpdate({ age: age.value })}
+                  className={`option-card ${profile.age === age.value ? 'selected' : ''}`}
+                  style={{ padding: '0.75rem', textAlign: 'center' }}
+                >
+                  <div className="option-title" style={{ fontSize: '0.875rem', marginBottom: '0.25rem' }}>
+                    {age.label}
+                  </div>
+                  <div className="option-description" style={{ fontSize: '0.75rem' }}>
+                    {age.description}
+                  </div>
+                </div>
+              ))}
+            </div>
+            {errors.age && (
+              <p className="form-error mt-2">{errors.age}</p>
+            )}
+          </div>
+
+          {/* Occupation */}
+          <div className="mb-6">
+            <h3 className="text-gray-700 font-medium mb-3 text-sm">Current Occupation *</h3>
+            <div className="grid grid-cols-2 gap-2">
+              {occupations.slice(0, 8).map((occ) => (
+                <div
+                  key={occ.value}
+                  onClick={() => onUpdate({ occupation: occ.value })}
+                  className={`option-card ${profile.occupation === occ.value ? 'selected' : ''}`}
+                  style={{ padding: '0.75rem', textAlign: 'center' }}
+                >
+                  <div className="option-icon" style={{ fontSize: '1.5rem', marginBottom: '0.25rem' }}>
+                    {occ.icon}
+                  </div>
+                  <div className="option-title" style={{ fontSize: '0.75rem' }}>
+                    {occ.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+            {errors.occupation && (
+              <p className="form-error mt-2">{errors.occupation}</p>
+            )}
+          </div>
+
+          {/* Education Level */}
+          <div className="mb-6">
+            <h3 className="text-gray-700 font-medium mb-3 text-sm">Education Level *</h3>
+            <div className="space-y-2">
+              {educationLevels.slice(0, 6).map((edu) => (
+                <div
+                  key={edu.value}
+                  onClick={() => onUpdate({ educationLevel: edu.value })}
+                  className={`flex items-center justify-between p-3 rounded-lg cursor-pointer transition-all duration-300 border ${
+                    profile.educationLevel === edu.value
+                      ? 'border-blue-500 bg-blue-50'
+                      : 'border-gray-200 hover:border-gray-300'
+                  }`}
+                >
+                  <div>
+                    <div className="font-medium text-gray-800 text-sm">{edu.label}</div>
+                    <div className="text-gray-600 text-xs">{edu.description}</div>
+                  </div>
+                  <div className={`w-4 h-4 rounded-full border-2 ${
+                    profile.educationLevel === edu.value
+                      ? 'bg-blue-500 border-blue-500'
+                      : 'border-gray-300'
+                  }`}>
+                    {profile.educationLevel === edu.value && (
+                      <div className="w-full h-full rounded-full bg-white scale-50"></div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+            {errors.educationLevel && (
+              <p className="form-error mt-2">{errors.educationLevel}</p>
+            )}
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="p-6 border-t border-gray-100">
+          <div className="flex justify-between items-center mb-4">
+            <button
+              onClick={onBack}
+              className="btn-secondary px-4 py-2 text-sm"
+            >
+              Back
+            </button>
+            <button
+              onClick={validateAndNext}
+              disabled={!profile.name.trim() || !profile.email.trim() || !profile.age || !profile.occupation || !profile.educationLevel}
+              className="btn-primary px-6 py-2 text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Continue
+            </button>
+          </div>
+          
+          {/* Progress Dots */}
+          <div className="progress-dots">
+            {Array.from({ length: totalSteps }, (_, index) => (
+              <div
+                key={index}
+                className={`progress-dot ${index + 1 === currentStep ? 'active' : index < currentStep ? 'completed' : ''}`}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
             {ageRanges.map((age) => (
               <div
                 key={age.value}
