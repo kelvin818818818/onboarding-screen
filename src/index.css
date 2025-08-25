@@ -704,19 +704,6 @@ body {
 }
 
 /* Footer Navigation */
-  border-radius: 12px !important;
-  margin-top: auto;
-  box-shadow: 0 8px 32px rgba(255, 107, 157, 0.15) !important;
-  backdrop-filter: blur(20px) !important;
-  border-top: 1px solid #f3f4f6;
-}
-
-  background: linear-gradient(135deg, #ff6b9d 0%, #4facfe 100%) !important;
-  border-color: #ff6b9d !important;
-  color: white !important;
-  transform: translateY(-2px) scale(1.05) !important;
-  box-shadow: 0 12px 48px rgba(255, 107, 157, 0.3) !important;
-}
 
 /* Progress Dots - Like Mobile Apps */
 .progress-dots {
