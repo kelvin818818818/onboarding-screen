@@ -552,12 +552,12 @@ body {
   background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%) !important;
   color: white !important;
   border-radius: 50% !important;
-  width: 24px !important;
-  height: 24px !important;
+  width: 20px !important;
+  height: 20px !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  font-size: 14px !important;
+  font-size: 11px !important;
   font-weight: bold !important;
   box-shadow: 0 4px 16px rgba(67, 233, 123, 0.4) !important;
   z-index: 10 !important;
@@ -586,8 +586,8 @@ body {
 }
 
 @keyframes checkmarkPop {
-  0% { transform: scale(0) rotate(0deg); }
-  50% { transform: scale(1.2) rotate(180deg); }
+  width: 18px !important;
+  height: 18px !important;
   100% { transform: scale(1) rotate(360deg); }
 }
 
