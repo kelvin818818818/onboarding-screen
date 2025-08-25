@@ -90,12 +90,20 @@ export const OptionCard: React.FC<OptionCardProps> = ({
       
       {isSelected && (
         <motion.div
-          className="absolute -top-2 -right-2 bg-primary-400 text-white rounded-full p-2 shadow-lg"
+          className="absolute -top-1 -right-1 bg-primary-400 text-white rounded-full shadow-lg"
+          style={{ 
+            width: '20px', 
+            height: '20px', 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center',
+            fontSize: '12px'
+          }}
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: "spring", stiffness: 500, damping: 30 }}
         >
-          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+          <svg style={{ width: '10px', height: '10px' }} fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
           </svg>
         </motion.div>
